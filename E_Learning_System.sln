@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Domain", "ELearning.Domain\ELearning.Domain.csproj", "{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELearning.Application", "ELearning.Application\ELearning.Application.csproj", "{E1A89271-DA91-46DE-BCA9-6F897BFDB081}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E_Learning_System", "E_Learning_System\E_Learning_System.csproj", "{F207598D-4B13-430C-8524-788D3E36D837}"
 EndProject
 Global
@@ -11,6 +15,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1A89271-DA91-46DE-BCA9-6F897BFDB081}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1A89271-DA91-46DE-BCA9-6F897BFDB081}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1A89271-DA91-46DE-BCA9-6F897BFDB081}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1A89271-DA91-46DE-BCA9-6F897BFDB081}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F207598D-4B13-430C-8524-788D3E36D837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F207598D-4B13-430C-8524-788D3E36D837}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F207598D-4B13-430C-8524-788D3E36D837}.Release|Any CPU.ActiveCfg = Release|Any CPU

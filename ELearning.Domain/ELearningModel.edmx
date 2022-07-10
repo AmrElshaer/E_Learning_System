@@ -1,0 +1,1260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applicants">
+          <Key>
+            <PropertyRef Name="ApplicantId" />
+          </Key>
+          <Property Name="ApplicantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="StreetAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="ApplicationReceivedDate" Type="date" Nullable="false" />
+          <Property Name="EntryTerm" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="ApplicationType" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Gpa" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="SatMathScore" Type="int" />
+          <Property Name="SatReadingScore" Type="int" />
+          <Property Name="SatWritingScore" Type="int" />
+          <Property Name="EssayScore" Type="int" />
+          <Property Name="ApplicationStatus" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="AdmissionPoints" Type="float" />
+        </EntityType>
+        <EntityType Name="ClassStandings">
+          <Key>
+            <PropertyRef Name="ClassStandingCode" />
+          </Key>
+          <Property Name="ClassStandingCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="ClassStandingName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="DegreeLevelCode" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="RequiredCredits" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseEnrollments">
+          <Key>
+            <PropertyRef Name="CourseEnrollmentId" />
+          </Key>
+          <Property Name="CourseEnrollmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseOfferingId" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="CourseOfferings">
+          <Key>
+            <PropertyRef Name="CourseOfferingId" />
+          </Key>
+          <Property Name="CourseOfferingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CourseNumber" Type="int" Nullable="false" />
+          <Property Name="TermCode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Section" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="DepartmentCode" />
+            <PropertyRef Name="CourseNumber" />
+          </Key>
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CourseNumber" Type="int" Nullable="false" />
+          <Property Name="CourseTitle" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CourseDescription" Type="varchar" MaxLength="512" Nullable="false" />
+          <Property Name="Credits" Type="decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="MaximumSectionSize" Type="int" />
+        </EntityType>
+        <EntityType Name="DegreeLevels">
+          <Key>
+            <PropertyRef Name="DegreeLevelCode" />
+          </Key>
+          <Property Name="DegreeLevelCode" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DegreeLevelName" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DegreeRequirements">
+          <Key>
+            <PropertyRef Name="RequirementId" />
+          </Key>
+          <Property Name="RequirementId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DegreeId" Type="int" Nullable="false" />
+          <Property Name="ClassStandingCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="SessionCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CourseNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Degrees">
+          <Key>
+            <PropertyRef Name="DegreeId" />
+          </Key>
+          <Property Name="DegreeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="DegreeTypeCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="DegreeName" Type="varchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DegreeTypes">
+          <Key>
+            <PropertyRef Name="DegreeTypeCode" />
+          </Key>
+          <Property Name="DegreeTypeCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="DegreeTypeName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="DegreeLevelCode" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="DepartmentCode" />
+          </Key>
+          <Property Name="DepartmentCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="Grade" />
+          </Key>
+          <Property Name="Grade" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Points" Type="decimal" Precision="2" Scale="1" />
+          <Property Name="IncludeInGpa" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="SessionCode" />
+          </Key>
+          <Property Name="SessionCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="SessionName" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentProfiles">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="ProfileId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="StreetAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="DegreePursued" Type="int" Nullable="false" />
+          <Property Name="ClassStandingCode" Type="varchar" MaxLength="2" />
+          <Property Name="StudentStatus" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="EnrollmentTerm" Type="varchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Terms">
+          <Key>
+            <PropertyRef Name="TermCode" />
+          </Key>
+          <Property Name="TermCode" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="SessionCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_applicants_entry_term">
+          <End Role="Terms" Type="Self.Terms" Multiplicity="1" />
+          <End Role="Applicants" Type="Self.Applicants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terms">
+              <PropertyRef Name="TermCode" />
+            </Principal>
+            <Dependent Role="Applicants">
+              <PropertyRef Name="EntryTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_stdgs_degree_level_cd">
+          <End Role="DegreeLevels" Type="Self.DegreeLevels" Multiplicity="1" />
+          <End Role="ClassStandings" Type="Self.ClassStandings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeLevels">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Principal>
+            <Dependent Role="ClassStandings">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseEnrollments_CourseOfferings">
+          <End Role="CourseOfferings" Type="Self.CourseOfferings" Multiplicity="1" />
+          <End Role="CourseEnrollments" Type="Self.CourseEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseOfferings">
+              <PropertyRef Name="CourseOfferingId" />
+            </Principal>
+            <Dependent Role="CourseEnrollments">
+              <PropertyRef Name="CourseOfferingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseEnrollments_Grade">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="0..1" />
+          <End Role="CourseEnrollments" Type="Self.CourseEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="Grade" />
+            </Principal>
+            <Dependent Role="CourseEnrollments">
+              <PropertyRef Name="Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseEnrollments_StudentId">
+          <End Role="Students" Type="Self.Students" Multiplicity="1" />
+          <End Role="CourseEnrollments" Type="Self.CourseEnrollments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="CourseEnrollments">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseOfferings_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="CourseOfferings" Type="Self.CourseOfferings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Principal>
+            <Dependent Role="CourseOfferings">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseOfferings_TermCode">
+          <End Role="Terms" Type="Self.Terms" Multiplicity="1" />
+          <End Role="CourseOfferings" Type="Self.CourseOfferings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terms">
+              <PropertyRef Name="TermCode" />
+            </Principal>
+            <Dependent Role="CourseOfferings">
+              <PropertyRef Name="TermCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Courses_DepartmentCode">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentCode" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_degree_types_degree_type_cd">
+          <End Role="DegreeLevels" Type="Self.DegreeLevels" Multiplicity="1" />
+          <End Role="DegreeTypes" Type="Self.DegreeTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeLevels">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Principal>
+            <Dependent Role="DegreeTypes">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_ClassStandingCode">
+          <End Role="ClassStandings" Type="Self.ClassStandings" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassStandings">
+              <PropertyRef Name="ClassStandingCode" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="ClassStandingCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_Courses">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_DegreeId">
+          <End Role="Degrees" Type="Self.Degrees" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degrees">
+              <PropertyRef Name="DegreeId" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_SessionCode">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionCode" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="SessionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_degrees_DegreeTypeCode">
+          <End Role="DegreeTypes" Type="Self.DegreeTypes" Multiplicity="1" />
+          <End Role="Degrees" Type="Self.Degrees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeTypes">
+              <PropertyRef Name="DegreeTypeCode" />
+            </Principal>
+            <Dependent Role="Degrees">
+              <PropertyRef Name="DegreeTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_degrees_DepartmentCode">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Degrees" Type="Self.Degrees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentCode" />
+            </Principal>
+            <Dependent Role="Degrees">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Students_ClassStanding">
+          <End Role="ClassStandings" Type="Self.ClassStandings" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassStandings">
+              <PropertyRef Name="ClassStandingCode" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="ClassStandingCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Students_DegreePursued">
+          <End Role="Degrees" Type="Self.Degrees" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degrees">
+              <PropertyRef Name="DegreeId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="DegreePursued" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Students_EnrollmentTerm">
+          <End Role="Terms" Type="Self.Terms" Multiplicity="1" />
+          <End Role="Students" Type="Self.Students" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terms">
+              <PropertyRef Name="TermCode" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="EnrollmentTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Terms_SessionCode">
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
+          <End Role="Terms" Type="Self.Terms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionCode" />
+            </Principal>
+            <Dependent Role="Terms">
+              <PropertyRef Name="SessionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentsModelStoreContainer">
+          <EntitySet Name="Applicants" EntityType="Self.Applicants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClassStandings" EntityType="Self.ClassStandings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseEnrollments" EntityType="Self.CourseEnrollments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseOfferings" EntityType="Self.CourseOfferings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DegreeLevels" EntityType="Self.DegreeLevels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DegreeRequirements" EntityType="Self.DegreeRequirements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degrees" EntityType="Self.Degrees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DegreeTypes" EntityType="Self.DegreeTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentProfiles" EntityType="Self.StudentProfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Terms" EntityType="Self.Terms" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_applicants_entry_term" Association="Self.fk_applicants_entry_term">
+            <End Role="Terms" EntitySet="Terms" />
+            <End Role="Applicants" EntitySet="Applicants" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_stdgs_degree_level_cd" Association="Self.fk_class_stdgs_degree_level_cd">
+            <End Role="DegreeLevels" EntitySet="DegreeLevels" />
+            <End Role="ClassStandings" EntitySet="ClassStandings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseEnrollments_CourseOfferings" Association="Self.fk_CourseEnrollments_CourseOfferings">
+            <End Role="CourseOfferings" EntitySet="CourseOfferings" />
+            <End Role="CourseEnrollments" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseEnrollments_Grade" Association="Self.fk_CourseEnrollments_Grade">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="CourseEnrollments" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseEnrollments_StudentId" Association="Self.fk_CourseEnrollments_StudentId">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="CourseEnrollments" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseOfferings_Courses" Association="Self.fk_CourseOfferings_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseOfferings" EntitySet="CourseOfferings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseOfferings_TermCode" Association="Self.fk_CourseOfferings_TermCode">
+            <End Role="Terms" EntitySet="Terms" />
+            <End Role="CourseOfferings" EntitySet="CourseOfferings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Courses_DepartmentCode" Association="Self.fk_Courses_DepartmentCode">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_degree_types_degree_type_cd" Association="Self.fk_degree_types_degree_type_cd">
+            <End Role="DegreeLevels" EntitySet="DegreeLevels" />
+            <End Role="DegreeTypes" EntitySet="DegreeTypes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_ClassStandingCode" Association="Self.fk_DegreeReqirements_ClassStandingCode">
+            <End Role="ClassStandings" EntitySet="ClassStandings" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_Courses" Association="Self.fk_DegreeReqirements_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_DegreeId" Association="Self.fk_DegreeReqirements_DegreeId">
+            <End Role="Degrees" EntitySet="Degrees" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_SessionCode" Association="Self.fk_DegreeReqirements_SessionCode">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_degrees_DegreeTypeCode" Association="Self.fk_degrees_DegreeTypeCode">
+            <End Role="DegreeTypes" EntitySet="DegreeTypes" />
+            <End Role="Degrees" EntitySet="Degrees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_degrees_DepartmentCode" Association="Self.fk_degrees_DepartmentCode">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Degrees" EntitySet="Degrees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Students_ClassStanding" Association="Self.fk_Students_ClassStanding">
+            <End Role="ClassStandings" EntitySet="ClassStandings" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Students_DegreePursued" Association="Self.fk_Students_DegreePursued">
+            <End Role="Degrees" EntitySet="Degrees" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Students_EnrollmentTerm" Association="Self.fk_Students_EnrollmentTerm">
+            <End Role="Terms" EntitySet="Terms" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Terms_SessionCode" Association="Self.fk_Terms_SessionCode">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Terms" EntitySet="Terms" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Applicant">
+          <Key>
+            <PropertyRef Name="ApplicantId" />
+          </Key>
+          <Property Name="ApplicantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ApplicationReceivedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EntryTerm" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApplicationType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gpa" Type="Decimal" Precision="3" Scale="2" />
+          <Property Name="SatMathScore" Type="Int32" />
+          <Property Name="SatReadingScore" Type="Int32" />
+          <Property Name="SatWritingScore" Type="Int32" />
+          <Property Name="EssayScore" Type="Int32" />
+          <Property Name="ApplicationStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdmissionPoints" Type="Double" />
+          <NavigationProperty Name="Term" Relationship="Self.fk_applicants_entry_term" FromRole="Applicants" ToRole="Terms" />
+        </EntityType>
+        <EntityType Name="ClassStanding">
+          <Key>
+            <PropertyRef Name="ClassStandingCode" />
+          </Key>
+          <Property Name="ClassStandingCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClassStandingName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DegreeLevelCode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequiredCredits" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DegreeLevel" Relationship="Self.fk_class_stdgs_degree_level_cd" FromRole="ClassStandings" ToRole="DegreeLevels" />
+          <NavigationProperty Name="DegreeRequirements" Relationship="Self.fk_DegreeReqirements_ClassStandingCode" FromRole="ClassStandings" ToRole="DegreeRequirements" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_Students_ClassStanding" FromRole="ClassStandings" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="CourseEnrollment">
+          <Key>
+            <PropertyRef Name="CourseEnrollmentId" />
+          </Key>
+          <Property Name="CourseEnrollmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseOfferingId" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Grade" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseOffering" Relationship="Self.fk_CourseEnrollments_CourseOfferings" FromRole="CourseEnrollments" ToRole="CourseOfferings" />
+          <NavigationProperty Name="Grade1" Relationship="Self.fk_CourseEnrollments_Grade" FromRole="CourseEnrollments" ToRole="Grades" />
+          <NavigationProperty Name="Student" Relationship="Self.fk_CourseEnrollments_StudentId" FromRole="CourseEnrollments" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="CourseOffering">
+          <Key>
+            <PropertyRef Name="CourseOfferingId" />
+          </Key>
+          <Property Name="CourseOfferingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseNumber" Type="Int32" Nullable="false" />
+          <Property Name="TermCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Section" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseEnrollments" Relationship="Self.fk_CourseEnrollments_CourseOfferings" FromRole="CourseOfferings" ToRole="CourseEnrollments" />
+          <NavigationProperty Name="Cours" Relationship="Self.fk_CourseOfferings_Courses" FromRole="CourseOfferings" ToRole="Courses" />
+          <NavigationProperty Name="Term" Relationship="Self.fk_CourseOfferings_TermCode" FromRole="CourseOfferings" ToRole="Terms" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="DepartmentCode" />
+            <PropertyRef Name="CourseNumber" />
+          </Key>
+          <Property Name="DepartmentCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseNumber" Type="Int32" Nullable="false" />
+          <Property Name="CourseTitle" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseDescription" Type="String" MaxLength="512" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Credits" Type="Decimal" Precision="3" Scale="1" Nullable="false" />
+          <Property Name="MaximumSectionSize" Type="Int32" />
+          <NavigationProperty Name="CourseOfferings" Relationship="Self.fk_CourseOfferings_Courses" FromRole="Courses" ToRole="CourseOfferings" />
+          <NavigationProperty Name="Department" Relationship="Self.fk_Courses_DepartmentCode" FromRole="Courses" ToRole="Departments" />
+          <NavigationProperty Name="DegreeRequirements" Relationship="Self.fk_DegreeReqirements_Courses" FromRole="Courses" ToRole="DegreeRequirements" />
+        </EntityType>
+        <EntityType Name="DegreeLevel">
+          <Key>
+            <PropertyRef Name="DegreeLevelCode" />
+          </Key>
+          <Property Name="DegreeLevelCode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DegreeLevelName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClassStandings" Relationship="Self.fk_class_stdgs_degree_level_cd" FromRole="DegreeLevels" ToRole="ClassStandings" />
+          <NavigationProperty Name="DegreeTypes" Relationship="Self.fk_degree_types_degree_type_cd" FromRole="DegreeLevels" ToRole="DegreeTypes" />
+        </EntityType>
+        <EntityType Name="DegreeRequirement">
+          <Key>
+            <PropertyRef Name="RequirementId" />
+          </Key>
+          <Property Name="RequirementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DegreeId" Type="Int32" Nullable="false" />
+          <Property Name="ClassStandingCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SessionCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CourseNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClassStanding" Relationship="Self.fk_DegreeReqirements_ClassStandingCode" FromRole="DegreeRequirements" ToRole="ClassStandings" />
+          <NavigationProperty Name="Cours" Relationship="Self.fk_DegreeReqirements_Courses" FromRole="DegreeRequirements" ToRole="Courses" />
+          <NavigationProperty Name="Degree" Relationship="Self.fk_DegreeReqirements_DegreeId" FromRole="DegreeRequirements" ToRole="Degrees" />
+          <NavigationProperty Name="Session" Relationship="Self.fk_DegreeReqirements_SessionCode" FromRole="DegreeRequirements" ToRole="Sessions" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="DegreeId" />
+          </Key>
+          <Property Name="DegreeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DegreeTypeCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DegreeName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DegreeRequirements" Relationship="Self.fk_DegreeReqirements_DegreeId" FromRole="Degrees" ToRole="DegreeRequirements" />
+          <NavigationProperty Name="DegreeType" Relationship="Self.fk_degrees_DegreeTypeCode" FromRole="Degrees" ToRole="DegreeTypes" />
+          <NavigationProperty Name="Department" Relationship="Self.fk_degrees_DepartmentCode" FromRole="Degrees" ToRole="Departments" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_Students_DegreePursued" FromRole="Degrees" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="DegreeType">
+          <Key>
+            <PropertyRef Name="DegreeTypeCode" />
+          </Key>
+          <Property Name="DegreeTypeCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DegreeTypeName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DegreeLevelCode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DegreeLevel" Relationship="Self.fk_degree_types_degree_type_cd" FromRole="DegreeTypes" ToRole="DegreeLevels" />
+          <NavigationProperty Name="Degrees" Relationship="Self.fk_degrees_DegreeTypeCode" FromRole="DegreeTypes" ToRole="Degrees" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentCode" />
+          </Key>
+          <Property Name="DepartmentCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.fk_Courses_DepartmentCode" FromRole="Departments" ToRole="Courses" />
+          <NavigationProperty Name="Degrees" Relationship="Self.fk_degrees_DepartmentCode" FromRole="Departments" ToRole="Degrees" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="Grade1" />
+          </Key>
+          <Property Name="Grade1" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Points" Type="Decimal" Precision="2" Scale="1" />
+          <Property Name="IncludeInGpa" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CourseEnrollments" Relationship="Self.fk_CourseEnrollments_Grade" FromRole="Grades" ToRole="CourseEnrollments" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="SessionCode" />
+          </Key>
+          <Property Name="SessionCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SessionName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DegreeRequirements" Relationship="Self.fk_DegreeReqirements_SessionCode" FromRole="Sessions" ToRole="DegreeRequirements" />
+          <NavigationProperty Name="Terms" Relationship="Self.fk_Terms_SessionCode" FromRole="Sessions" ToRole="Terms" />
+        </EntityType>
+        <EntityType Name="StudentProfile">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DegreePursued" Type="Int32" Nullable="false" />
+          <Property Name="ClassStandingCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="StudentStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EnrollmentTerm" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClassStanding" Relationship="Self.fk_Students_ClassStanding" FromRole="Students" ToRole="ClassStandings" />
+          <NavigationProperty Name="CourseEnrollments" Relationship="Self.fk_CourseEnrollments_StudentId" FromRole="Students" ToRole="CourseEnrollments" />
+          <NavigationProperty Name="Degree" Relationship="Self.fk_Students_DegreePursued" FromRole="Students" ToRole="Degrees" />
+          <NavigationProperty Name="Term" Relationship="Self.fk_Students_EnrollmentTerm" FromRole="Students" ToRole="Terms" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Term">
+          <Key>
+            <PropertyRef Name="TermCode" />
+          </Key>
+          <Property Name="TermCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SessionCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Applicants" Relationship="Self.fk_applicants_entry_term" FromRole="Terms" ToRole="Applicants" />
+          <NavigationProperty Name="CourseOfferings" Relationship="Self.fk_CourseOfferings_TermCode" FromRole="Terms" ToRole="CourseOfferings" />
+          <NavigationProperty Name="Session" Relationship="Self.fk_Terms_SessionCode" FromRole="Terms" ToRole="Sessions" />
+          <NavigationProperty Name="Students" Relationship="Self.fk_Students_EnrollmentTerm" FromRole="Terms" ToRole="Students" />
+        </EntityType>
+        <Association Name="fk_applicants_entry_term">
+          <End Role="Terms" Type="Self.Term" Multiplicity="1" />
+          <End Role="Applicants" Type="Self.Applicant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terms">
+              <PropertyRef Name="TermCode" />
+            </Principal>
+            <Dependent Role="Applicants">
+              <PropertyRef Name="EntryTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_stdgs_degree_level_cd">
+          <End Role="DegreeLevels" Type="Self.DegreeLevel" Multiplicity="1" />
+          <End Role="ClassStandings" Type="Self.ClassStanding" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeLevels">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Principal>
+            <Dependent Role="ClassStandings">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_ClassStandingCode">
+          <End Role="ClassStandings" Type="Self.ClassStanding" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassStandings">
+              <PropertyRef Name="ClassStandingCode" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="ClassStandingCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Students_ClassStanding">
+          <End Role="ClassStandings" Type="Self.ClassStanding" Multiplicity="0..1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassStandings">
+              <PropertyRef Name="ClassStandingCode" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="ClassStandingCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseEnrollments_CourseOfferings">
+          <End Role="CourseOfferings" Type="Self.CourseOffering" Multiplicity="1" />
+          <End Role="CourseEnrollments" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseOfferings">
+              <PropertyRef Name="CourseOfferingId" />
+            </Principal>
+            <Dependent Role="CourseEnrollments">
+              <PropertyRef Name="CourseOfferingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseEnrollments_Grade">
+          <End Role="Grades" Type="Self.Grade" Multiplicity="0..1" />
+          <End Role="CourseEnrollments" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="Grade1" />
+            </Principal>
+            <Dependent Role="CourseEnrollments">
+              <PropertyRef Name="Grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseEnrollments_StudentId">
+          <End Role="Students" Type="Self.Student" Multiplicity="1" />
+          <End Role="CourseEnrollments" Type="Self.CourseEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="CourseEnrollments">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseOfferings_Courses">
+          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+          <End Role="CourseOfferings" Type="Self.CourseOffering" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Principal>
+            <Dependent Role="CourseOfferings">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CourseOfferings_TermCode">
+          <End Role="Terms" Type="Self.Term" Multiplicity="1" />
+          <End Role="CourseOfferings" Type="Self.CourseOffering" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terms">
+              <PropertyRef Name="TermCode" />
+            </Principal>
+            <Dependent Role="CourseOfferings">
+              <PropertyRef Name="TermCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Courses_DepartmentCode">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentCode" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_Courses">
+          <End Role="Courses" Type="Self.Cours" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="DepartmentCode" />
+              <PropertyRef Name="CourseNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_degree_types_degree_type_cd">
+          <End Role="DegreeLevels" Type="Self.DegreeLevel" Multiplicity="1" />
+          <End Role="DegreeTypes" Type="Self.DegreeType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeLevels">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Principal>
+            <Dependent Role="DegreeTypes">
+              <PropertyRef Name="DegreeLevelCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_DegreeId">
+          <End Role="Degrees" Type="Self.Degree" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degrees">
+              <PropertyRef Name="DegreeId" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DegreeReqirements_SessionCode">
+          <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+          <End Role="DegreeRequirements" Type="Self.DegreeRequirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionCode" />
+            </Principal>
+            <Dependent Role="DegreeRequirements">
+              <PropertyRef Name="SessionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_degrees_DegreeTypeCode">
+          <End Role="DegreeTypes" Type="Self.DegreeType" Multiplicity="1" />
+          <End Role="Degrees" Type="Self.Degree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DegreeTypes">
+              <PropertyRef Name="DegreeTypeCode" />
+            </Principal>
+            <Dependent Role="Degrees">
+              <PropertyRef Name="DegreeTypeCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_degrees_DepartmentCode">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Degrees" Type="Self.Degree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="DepartmentCode" />
+            </Principal>
+            <Dependent Role="Degrees">
+              <PropertyRef Name="DepartmentCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Students_DegreePursued">
+          <End Role="Degrees" Type="Self.Degree" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degrees">
+              <PropertyRef Name="DegreeId" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="DegreePursued" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Terms_SessionCode">
+          <End Role="Sessions" Type="Self.Session" Multiplicity="1" />
+          <End Role="Terms" Type="Self.Term" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="SessionCode" />
+            </Principal>
+            <Dependent Role="Terms">
+              <PropertyRef Name="SessionCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Students_EnrollmentTerm">
+          <End Role="Terms" Type="Self.Term" Multiplicity="1" />
+          <End Role="Students" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Terms">
+              <PropertyRef Name="TermCode" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="EnrollmentTerm" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="StudentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applicants" EntityType="Self.Applicant" />
+          <EntitySet Name="ClassStandings" EntityType="Self.ClassStanding" />
+          <EntitySet Name="CourseEnrollments" EntityType="Self.CourseEnrollment" />
+          <EntitySet Name="CourseOfferings" EntityType="Self.CourseOffering" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+          <EntitySet Name="DegreeLevels" EntityType="Self.DegreeLevel" />
+          <EntitySet Name="DegreeRequirements" EntityType="Self.DegreeRequirement" />
+          <EntitySet Name="Degrees" EntityType="Self.Degree" />
+          <EntitySet Name="DegreeTypes" EntityType="Self.DegreeType" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="StudentProfiles" EntityType="Self.StudentProfile" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Terms" EntityType="Self.Term" />
+          <AssociationSet Name="fk_applicants_entry_term" Association="Self.fk_applicants_entry_term">
+            <End Role="Terms" EntitySet="Terms" />
+            <End Role="Applicants" EntitySet="Applicants" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_stdgs_degree_level_cd" Association="Self.fk_class_stdgs_degree_level_cd">
+            <End Role="DegreeLevels" EntitySet="DegreeLevels" />
+            <End Role="ClassStandings" EntitySet="ClassStandings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_ClassStandingCode" Association="Self.fk_DegreeReqirements_ClassStandingCode">
+            <End Role="ClassStandings" EntitySet="ClassStandings" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Students_ClassStanding" Association="Self.fk_Students_ClassStanding">
+            <End Role="ClassStandings" EntitySet="ClassStandings" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseEnrollments_CourseOfferings" Association="Self.fk_CourseEnrollments_CourseOfferings">
+            <End Role="CourseOfferings" EntitySet="CourseOfferings" />
+            <End Role="CourseEnrollments" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseEnrollments_Grade" Association="Self.fk_CourseEnrollments_Grade">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="CourseEnrollments" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseEnrollments_StudentId" Association="Self.fk_CourseEnrollments_StudentId">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="CourseEnrollments" EntitySet="CourseEnrollments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseOfferings_Courses" Association="Self.fk_CourseOfferings_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseOfferings" EntitySet="CourseOfferings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CourseOfferings_TermCode" Association="Self.fk_CourseOfferings_TermCode">
+            <End Role="Terms" EntitySet="Terms" />
+            <End Role="CourseOfferings" EntitySet="CourseOfferings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Courses_DepartmentCode" Association="Self.fk_Courses_DepartmentCode">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_Courses" Association="Self.fk_DegreeReqirements_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_degree_types_degree_type_cd" Association="Self.fk_degree_types_degree_type_cd">
+            <End Role="DegreeLevels" EntitySet="DegreeLevels" />
+            <End Role="DegreeTypes" EntitySet="DegreeTypes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_DegreeId" Association="Self.fk_DegreeReqirements_DegreeId">
+            <End Role="Degrees" EntitySet="Degrees" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DegreeReqirements_SessionCode" Association="Self.fk_DegreeReqirements_SessionCode">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="DegreeRequirements" EntitySet="DegreeRequirements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_degrees_DegreeTypeCode" Association="Self.fk_degrees_DegreeTypeCode">
+            <End Role="DegreeTypes" EntitySet="DegreeTypes" />
+            <End Role="Degrees" EntitySet="Degrees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_degrees_DepartmentCode" Association="Self.fk_degrees_DepartmentCode">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Degrees" EntitySet="Degrees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Students_DegreePursued" Association="Self.fk_Students_DegreePursued">
+            <End Role="Degrees" EntitySet="Degrees" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Terms_SessionCode" Association="Self.fk_Terms_SessionCode">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Terms" EntitySet="Terms" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Students_EnrollmentTerm" Association="Self.fk_Students_EnrollmentTerm">
+            <End Role="Terms" EntitySet="Terms" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentsModelStoreContainer" CdmEntityContainer="StudentsEntities">
+          <EntitySetMapping Name="Applicants">
+            <EntityTypeMapping TypeName="StudentsModel.Applicant">
+              <MappingFragment StoreEntitySet="Applicants">
+                <ScalarProperty Name="ApplicantId" ColumnName="ApplicantId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="ApplicationReceivedDate" ColumnName="ApplicationReceivedDate" />
+                <ScalarProperty Name="EntryTerm" ColumnName="EntryTerm" />
+                <ScalarProperty Name="ApplicationType" ColumnName="ApplicationType" />
+                <ScalarProperty Name="Gpa" ColumnName="Gpa" />
+                <ScalarProperty Name="SatMathScore" ColumnName="SatMathScore" />
+                <ScalarProperty Name="SatReadingScore" ColumnName="SatReadingScore" />
+                <ScalarProperty Name="SatWritingScore" ColumnName="SatWritingScore" />
+                <ScalarProperty Name="EssayScore" ColumnName="EssayScore" />
+                <ScalarProperty Name="ApplicationStatus" ColumnName="ApplicationStatus" />
+                <ScalarProperty Name="AdmissionPoints" ColumnName="AdmissionPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassStandings">
+            <EntityTypeMapping TypeName="StudentsModel.ClassStanding">
+              <MappingFragment StoreEntitySet="ClassStandings">
+                <ScalarProperty Name="ClassStandingCode" ColumnName="ClassStandingCode" />
+                <ScalarProperty Name="ClassStandingName" ColumnName="ClassStandingName" />
+                <ScalarProperty Name="DegreeLevelCode" ColumnName="DegreeLevelCode" />
+                <ScalarProperty Name="RequiredCredits" ColumnName="RequiredCredits" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseEnrollments">
+            <EntityTypeMapping TypeName="StudentsModel.CourseEnrollment">
+              <MappingFragment StoreEntitySet="CourseEnrollments">
+                <ScalarProperty Name="CourseEnrollmentId" ColumnName="CourseEnrollmentId" />
+                <ScalarProperty Name="CourseOfferingId" ColumnName="CourseOfferingId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseOfferings">
+            <EntityTypeMapping TypeName="StudentsModel.CourseOffering">
+              <MappingFragment StoreEntitySet="CourseOfferings">
+                <ScalarProperty Name="CourseOfferingId" ColumnName="CourseOfferingId" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
+                <ScalarProperty Name="TermCode" ColumnName="TermCode" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="StudentsModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
+                <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+                <ScalarProperty Name="CourseDescription" ColumnName="CourseDescription" />
+                <ScalarProperty Name="Credits" ColumnName="Credits" />
+                <ScalarProperty Name="MaximumSectionSize" ColumnName="MaximumSectionSize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DegreeLevels">
+            <EntityTypeMapping TypeName="StudentsModel.DegreeLevel">
+              <MappingFragment StoreEntitySet="DegreeLevels">
+                <ScalarProperty Name="DegreeLevelCode" ColumnName="DegreeLevelCode" />
+                <ScalarProperty Name="DegreeLevelName" ColumnName="DegreeLevelName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DegreeRequirements">
+            <EntityTypeMapping TypeName="StudentsModel.DegreeRequirement">
+              <MappingFragment StoreEntitySet="DegreeRequirements">
+                <ScalarProperty Name="RequirementId" ColumnName="RequirementId" />
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="ClassStandingCode" ColumnName="ClassStandingCode" />
+                <ScalarProperty Name="SessionCode" ColumnName="SessionCode" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="CourseNumber" ColumnName="CourseNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degrees">
+            <EntityTypeMapping TypeName="StudentsModel.Degree">
+              <MappingFragment StoreEntitySet="Degrees">
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="DegreeTypeCode" ColumnName="DegreeTypeCode" />
+                <ScalarProperty Name="DegreeName" ColumnName="DegreeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DegreeTypes">
+            <EntityTypeMapping TypeName="StudentsModel.DegreeType">
+              <MappingFragment StoreEntitySet="DegreeTypes">
+                <ScalarProperty Name="DegreeTypeCode" ColumnName="DegreeTypeCode" />
+                <ScalarProperty Name="DegreeTypeName" ColumnName="DegreeTypeName" />
+                <ScalarProperty Name="DegreeLevelCode" ColumnName="DegreeLevelCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="StudentsModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="DepartmentCode" ColumnName="DepartmentCode" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="StudentsModel.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="IncludeInGpa" ColumnName="IncludeInGpa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="StudentsModel.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="SessionCode" ColumnName="SessionCode" />
+                <ScalarProperty Name="SessionName" ColumnName="SessionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentProfiles">
+            <EntityTypeMapping TypeName="StudentsModel.StudentProfile">
+              <MappingFragment StoreEntitySet="StudentProfiles">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="StudentsModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="StreetAddress" ColumnName="StreetAddress" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="DegreePursued" ColumnName="DegreePursued" />
+                <ScalarProperty Name="ClassStandingCode" ColumnName="ClassStandingCode" />
+                <ScalarProperty Name="StudentStatus" ColumnName="StudentStatus" />
+                <ScalarProperty Name="EnrollmentTerm" ColumnName="EnrollmentTerm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="StudentsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Terms">
+            <EntityTypeMapping TypeName="StudentsModel.Term">
+              <MappingFragment StoreEntitySet="Terms">
+                <ScalarProperty Name="TermCode" ColumnName="TermCode" />
+                <ScalarProperty Name="SessionCode" ColumnName="SessionCode" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

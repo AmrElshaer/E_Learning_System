@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="39ca0c9198334b4cb1513c8930508b75" Name="Diagram1" ZoomLevel="75">
+        <EntityTypeShape EntityType="StudentsModel.Applicant" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.ClassStanding" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.CourseEnrollment" Width="1.5" PointX="10.5" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.CourseOffering" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Cours" Width="1.5" PointX="0.75" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.DegreeLevel" Width="1.5" PointX="1.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.DegreeRequirement" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Degree" Width="1.5" PointX="0.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.DegreeType" Width="1.5" PointX="1.5" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Department" Width="1.5" PointX="1.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Grade" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Session" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.StudentProfile" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Student" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StudentsModel.Term" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <AssociationConnector Association="StudentsModel.fk_applicants_entry_term" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_class_stdgs_degree_level_cd" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_DegreeReqirements_ClassStandingCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_Students_ClassStanding" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_CourseEnrollments_CourseOfferings" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_CourseEnrollments_Grade" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_CourseEnrollments_StudentId" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_CourseOfferings_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_CourseOfferings_TermCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_Courses_DepartmentCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_DegreeReqirements_Courses" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_degree_types_degree_type_cd" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_DegreeReqirements_DegreeId" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_DegreeReqirements_SessionCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_degrees_DegreeTypeCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_degrees_DepartmentCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_Students_DegreePursued" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_Terms_SessionCode" ManuallyRouted="false" />
+        <AssociationConnector Association="StudentsModel.fk_Students_EnrollmentTerm" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
