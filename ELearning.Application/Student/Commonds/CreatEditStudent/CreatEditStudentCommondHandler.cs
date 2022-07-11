@@ -1,13 +1,22 @@
 ﻿using Ardalis.GuardClauses;
 using ELearning.Domain;
 using Mediator.Net.Context;
-
+using Mediator.Net.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ELearning.Application.Student.Commonds.CreatEditStudent
 {
-    public class CreatEditStudentCommondHandler : IRequestHandler<CreatEditStudentCommond>
+    public class StudentId : IResponse
+    {
+        public StudentId(int id)
+        {
+            Id = id;
+        }
+
+        public int Id { get; }
+    }
+    public class CreatEditStudentCommondHandler : IRequestHandler<CreatEditStudentCommond, StudentId>
     {
         private readonly StudentsEntities _dbContext;
 
@@ -17,7 +26,7 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
         }
 
 
-        public async Task<int> Handle(IReceiveContext<CreatEditStudentCommond> context, CancellationToken cancellationToken)
+        public async Task<StudentId> Handle(IReceiveContext<CreatEditStudentCommond> context, CancellationToken cancellationToken)
         {
             ELearning.Domain.Student std;
             if (context.Message.StudentId.HasValue)
@@ -34,7 +43,7 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
             std.FirstName = context.Message.FirstName;
             std.LastName = context.Message.LastName;
             await _dbContext.SaveChangesAsync();
-            return std.StudentId;
+            return new StudentId(std.StudentId);
         }
     }
 }
