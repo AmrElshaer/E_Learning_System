@@ -230,10 +230,6 @@
       <Project>{E1A89271-DA91-46DE-BCA9-6F897BFDB081}</Project>
       <Name>ELearning.Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ELearning.Domain\ELearning.Domain.csproj">
-      <Project>{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}</Project>
-      <Name>ELearning.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
