@@ -1,0 +1,61 @@
+﻿@model  ELearning.Application.Student.Commonds.CreatEditStudent.CreatEditStudentCommond
+@using Syncfusion.EJ2
+@*//define the model for store the model values*@
+
+@using Syncfusion.EJ2
+@using Syncfusion.EJ2
+<input style="display:none" name="StudentId" value="@Model.StudentId" />
+<div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input name="FirstName" value="@Model.FirstName" />
+
+                <span class="e-float-line"></span>
+                <label for="FirstName" class="e-float-text e-label-top">FirstName</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input name="LastName" value="@Model.LastName" />
+                <span class="e-float-line"></span>
+                <label for="LastName" class="e-float-text e-label-top">LastName</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input name="Telephone" value="@Model.Telephone" />
+                <span class="e-float-line"></span>
+                <label for="Telephone" class="e-float-text e-label-top">Telephone</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper">
+                <input name="StreetAddress" value="@Model.StreetAddress" />
+                <span class="e-float-line"></span>
+                <label for="StreetAddress" class="e-float-text e-label-top">StreetAddress</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                <input name="email" value="@Model.email" />
+                <span class="e-float-line"></span>
+                <label for="email" class="e-float-text e-label-top">email</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="e-float-input e-control-wrapper">
+                @Html.EJS().DatePickerFor(m => m.DateOfBirth).Placeholder("Date Of Birth").Render()
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.EJS().ScriptManager()

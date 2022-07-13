@@ -99,12 +99,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommond.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommondHandler.cs" />
+    <Compile Include="Student\Commonds\DeletStudent\DeletStudentCommond.cs" />
     <Compile Include="Student\Queries\GetStudents\GetStudentsQueries.cs" />
     <Compile Include="Student\Queries\StudentDto.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Student\Commonds\DeletStudent\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

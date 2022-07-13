@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using ELearning.Application;
+using System.Web.Configuration;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -11,6 +12,8 @@ namespace E_Learning_System
     {
         protected void Application_Start()
         {
+            // register syncfusion licence
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(WebConfigurationManager.AppSettings["SyncfusionLicence"]);
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

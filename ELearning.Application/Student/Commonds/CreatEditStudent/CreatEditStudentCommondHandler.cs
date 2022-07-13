@@ -21,11 +21,12 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
 
         public async Task<BaseEntity<int>> Handle(IReceiveContext<CreatEditStudentCommond> context, CancellationToken cancellationToken)
         {
+            var req = context.Message;
             ELearning.Domain.Student std;
-            if (context.Message.StudentId.HasValue)
+            if (req.StudentId.HasValue)
             {
-                var entity = await _dbContext.Students.FindAsync(context.Message.StudentId.Value);
-                Guard.Against.Null(entity, nameof(context.Message.StudentId), "Not Found This Student");
+                var entity = await _dbContext.Students.FindAsync(req.StudentId.Value);
+                Guard.Against.Null(entity, nameof(req.StudentId), "Not Found This Student");
                 std = entity;
             }
             else
@@ -33,8 +34,14 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
                 std = new Domain.Student();
                 _dbContext.Students.Add(std);
             }
-            std.FirstName = context.Message.FirstName;
-            std.LastName = context.Message.LastName;
+            std.FirstName = req.FirstName;
+            std.LastName = req.LastName;
+            std.City = req.City;
+            std.Telephone = req.Telephone;
+            std.DateOfBirth = req.DateOfBirth;
+            std.email = req.email;
+            std.StreetAddress = req.StreetAddress;
+            std.Gender = req.Gender;
             await _dbContext.SaveChangesAsync();
             return new BaseEntity<int>(std.StudentId);
         }
