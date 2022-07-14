@@ -1,22 +1,25 @@
 ﻿@using Syncfusion.EJ2
-@model IEnumerable<ELearning.Application.Student.Queries.StudentDto>
 
 
-@Html.EJS().Grid("Grid").DataSource((IEnumerable<object>)Model).ActionComplete("actionComplete").Columns(col =>
+@Html.EJS().Grid("Grid").DataSource(dataManager => { dataManager.Url("/Student/UrlDatasource").InsertUrl("/Student/Save").UpdateUrl("/Student/Save").RemoveUrl("/Student/Delete").Adaptor("UrlAdaptor"); }).ActionComplete("actionComplete").Columns(col =>
 {
 
-    col.Field("StudentId").HeaderText("StudentId").Visible(false).Add();
+    col.Field("StudentId").HeaderText("StudentId").IsPrimaryKey(true).Visible(false).Add();
     col.Field("FirstName").HeaderText("FirstName").Add();
     col.Field("LastName").HeaderText("LastName").Add();
     col.Field("email").HeaderText("Email").Add();
     col.Field("Telephone").HeaderText("Telephone").Add();
     col.Field("StreetAddress").HeaderText("StreetAddress").Add();
 
-}).AllowPaging(true).AllowSorting(true).AllowFiltering(true).PageSettings(page => page.PageSize(5)).EditSettings(edit =>
-{ edit.AllowAdding(true).AllowEditing(true).AllowDeleting(true).Mode(Syncfusion.EJ2.Grids.EditMode.Dialog).Template("#dialogtemplate"); }).Toolbar(new List<string>() { "Add", "Edit", "Delete"}).Render()
+}).AllowPaging(true).AllowSorting(true).AllowFiltering(true).AllowPdfExport(true).AllowExcelExport(true).PageSettings(page => page.PageSize(10)).EditSettings(edit =>
+{ edit.AllowAdding(true).AllowEditing(true).AllowDeleting(true).Mode(Syncfusion.EJ2.Grids.EditMode.Dialog).Template("#dialogtemplate"); }).Toolbar(new List<string>() { "Add", "Edit", "Delete","PDF","Excel"}).Render()
 
 <script>
-   function actionComplete(args) {
+    function actionComplete(args) {
+        console.log(args.requestType);
+        if (args.requestType==='insert') {
+
+        }
        if (args.requestType === 'beginEdit') {
           var ajax = new ej.base.Ajax({
             url: "/Student/CreatEditpartial", //render the partial view

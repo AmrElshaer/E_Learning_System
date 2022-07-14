@@ -38,7 +38,7 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
             std.LastName = req.LastName;
             std.City = req.City;
             std.Telephone = req.Telephone;
-            std.DateOfBirth = req.DateOfBirth;
+            std.DateOfBirth = req.DateOfBirth.Value;
             std.email = req.email;
             std.StreetAddress = req.StreetAddress;
             std.Gender = req.Gender;

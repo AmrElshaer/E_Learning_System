@@ -17,8 +17,8 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
         public string ZipCode { get; set; }
         public string Telephone { get; set; }
         public string email { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public int DegreePursued { get; set; }
+        public System.DateTime? DateOfBirth { get; set; }
+        public int? DegreePursued { get; set; }
         public string ClassStandingCode { get; set; }
         public string StudentStatus { get; set; }
         public string EnrollmentTerm { get; set; }
