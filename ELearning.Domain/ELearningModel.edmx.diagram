@@ -39,7 +39,6 @@
         <AssociationConnector Association="StudentsModel.fk_degrees_DepartmentCode" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_Students_DegreePursued" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_Terms_SessionCode" ManuallyRouted="false" />
-        <AssociationConnector Association="StudentsModel.fk_Students_EnrollmentTerm" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

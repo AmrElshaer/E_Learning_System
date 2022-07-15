@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Applicants">
           <Key>
             <PropertyRef Name="ApplicantId" />
@@ -143,20 +143,20 @@
           </Key>
           <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="MiddleName" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="40" />
           <Property Name="LastName" Type="varchar" MaxLength="40" Nullable="false" />
-          <Property Name="Gender" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="1" />
           <Property Name="StreetAddress" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="City" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
-          <Property Name="ZipCode" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="30" />
+          <Property Name="State" Type="varchar" MaxLength="2" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="5" />
           <Property Name="Telephone" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="DateOfBirth" Type="date" Nullable="false" />
           <Property Name="DegreePursued" Type="int" Nullable="false" />
           <Property Name="ClassStandingCode" Type="varchar" MaxLength="2" />
-          <Property Name="StudentStatus" Type="varchar" MaxLength="1" Nullable="false" />
-          <Property Name="EnrollmentTerm" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="StudentStatus" Type="varchar" MaxLength="1" />
+          <Property Name="EnrollmentTerm" Type="varchar" MaxLength="6" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -384,18 +384,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Students_EnrollmentTerm">
-          <End Role="Terms" Type="Self.Terms" Multiplicity="1" />
-          <End Role="Students" Type="Self.Students" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Terms">
-              <PropertyRef Name="TermCode" />
-            </Principal>
-            <Dependent Role="Students">
-              <PropertyRef Name="EnrollmentTerm" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Terms_SessionCode">
           <End Role="Sessions" Type="Self.Sessions" Multiplicity="1" />
           <End Role="Terms" Type="Self.Terms" Multiplicity="*" />
@@ -493,17 +481,12 @@
             <End Role="Degrees" EntitySet="Degrees" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-          <AssociationSet Name="fk_Students_EnrollmentTerm" Association="Self.fk_Students_EnrollmentTerm">
-            <End Role="Terms" EntitySet="Terms" />
-            <End Role="Students" EntitySet="Students" />
-          </AssociationSet>
           <AssociationSet Name="fk_Terms_SessionCode" Association="Self.fk_Terms_SessionCode">
             <End Role="Sessions" EntitySet="Sessions" />
             <End Role="Terms" EntitySet="Terms" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -675,24 +658,23 @@
           </Key>
           <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="StreetAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DegreePursued" Type="Int32" Nullable="false" />
           <Property Name="ClassStandingCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="StudentStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EnrollmentTerm" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StudentStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="EnrollmentTerm" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ClassStanding" Relationship="Self.fk_Students_ClassStanding" FromRole="Students" ToRole="ClassStandings" />
           <NavigationProperty Name="CourseEnrollments" Relationship="Self.fk_CourseEnrollments_StudentId" FromRole="Students" ToRole="CourseEnrollments" />
           <NavigationProperty Name="Degree" Relationship="Self.fk_Students_DegreePursued" FromRole="Students" ToRole="Degrees" />
-          <NavigationProperty Name="Term" Relationship="Self.fk_Students_EnrollmentTerm" FromRole="Students" ToRole="Terms" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -714,7 +696,6 @@
           <NavigationProperty Name="Applicants" Relationship="Self.fk_applicants_entry_term" FromRole="Terms" ToRole="Applicants" />
           <NavigationProperty Name="CourseOfferings" Relationship="Self.fk_CourseOfferings_TermCode" FromRole="Terms" ToRole="CourseOfferings" />
           <NavigationProperty Name="Session" Relationship="Self.fk_Terms_SessionCode" FromRole="Terms" ToRole="Sessions" />
-          <NavigationProperty Name="Students" Relationship="Self.fk_Students_EnrollmentTerm" FromRole="Terms" ToRole="Students" />
         </EntityType>
         <Association Name="fk_applicants_entry_term">
           <End Role="Terms" Type="Self.Term" Multiplicity="1" />
@@ -936,18 +917,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Students_EnrollmentTerm">
-          <End Role="Terms" Type="Self.Term" Multiplicity="1" />
-          <End Role="Students" Type="Self.Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Terms">
-              <PropertyRef Name="TermCode" />
-            </Principal>
-            <Dependent Role="Students">
-              <PropertyRef Name="EnrollmentTerm" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="StudentsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Applicants" EntityType="Self.Applicant" />
           <EntitySet Name="ClassStandings" EntityType="Self.ClassStanding" />
@@ -1036,10 +1005,6 @@
           <AssociationSet Name="fk_Terms_SessionCode" Association="Self.fk_Terms_SessionCode">
             <End Role="Sessions" EntitySet="Sessions" />
             <End Role="Terms" EntitySet="Terms" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Students_EnrollmentTerm" Association="Self.fk_Students_EnrollmentTerm">
-            <End Role="Terms" EntitySet="Terms" />
-            <End Role="Students" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
       </Schema>

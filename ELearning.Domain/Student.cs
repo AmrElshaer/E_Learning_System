@@ -41,6 +41,5 @@ namespace ELearning.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; }
         public virtual Degree Degree { get; set; }
-        public virtual Term Term { get; set; }
     }
 }
