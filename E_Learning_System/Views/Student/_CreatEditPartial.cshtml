@@ -1,9 +1,15 @@
 ﻿@model  ELearning.Application.Student.Commonds.CreatEditStudent.CreatEditStudentCommond
-@using Syncfusion.EJ2
-@*//define the model for store the model values*@
 
+@using ELearning.Application.Degree.Queries.GetDegrees;
+@using ELearning.Application.Common.Query;
 @using Syncfusion.EJ2
-@using Syncfusion.EJ2
+@using Mediator.Net
+@using System.Threading.Tasks
+@using Syncfusion.EJ2.DropDowns
+@{
+    var mediator = DependencyResolver.Current.GetService<IMediator>();
+    var degrees = Task.Run(()=>mediator.RequestAsync<GetDegreesQueries, QueryResult<ELearning.Application.Degree.Queries.DegreeDto>>(new GetDegreesQueries())).GetAwaiter().GetResult();
+}
 <input style="display:none" name="StudentId" value="@Model.StudentId" />
 <div>
     <div class="form-row">
@@ -54,6 +60,12 @@
             <div class="e-float-input e-control-wrapper">
                 @Html.EJS().DatePickerFor(m => m.DateOfBirth).Placeholder("Date Of Birth").Render()
             </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.EJS().DropDownList("DegreePursued").Value(Model.DegreePursued).DataSource(degrees.result).Placeholder("Degree").Fields(new DropDownListFieldSettings { Text = "DegreeName", Value = "DegreeId" }).Render()
+
         </div>
     </div>
 </div>

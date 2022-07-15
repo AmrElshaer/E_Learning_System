@@ -31,6 +31,7 @@ namespace E_Learning_System.Controllers
         [HttpPost]
         public ActionResult CreatEditPartial(CreatEditStudentCommond value)
         {
+
             return PartialView("_CreatEditPartial", value);
         }
 

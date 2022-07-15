@@ -96,6 +96,8 @@
     <Compile Include="Common\Query\DataManagerExtension.cs" />
     <Compile Include="Common\Query\QueryResult.cs" />
     <Compile Include="ApplicationModule.cs" />
+    <Compile Include="Degree\Queries\DegreeDto.cs" />
+    <Compile Include="Degree\Queries\GetDegrees\GetDegreesQueries.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommond.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommondHandler.cs" />
