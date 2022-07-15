@@ -20,10 +20,10 @@ namespace ELearning.Application.Student.Commonds.DeletStudent
             }
             public async Task Handle(IReceiveContext<DeletStudentCommond> context, CancellationToken cancellationToken)
             {
-                var std = await _context.Students.FindAsync(context.Message.StudentId, cancellationToken);
+                var std = await _context.Students.FindAsync(context.Message.StudentId);
                 Guard.Against.Null(std, nameof(context.Message.StudentId));
                 _context.Students.Remove(std);
-                await _context.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+                await _context.SaveChangesAsync();
             }
         }
     }

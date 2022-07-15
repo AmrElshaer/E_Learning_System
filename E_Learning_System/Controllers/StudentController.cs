@@ -41,9 +41,9 @@ namespace E_Learning_System.Controllers
             return Json(value);
 
         }
-        public async Task<ActionResult> Delete(CreatEditStudentCommond value)
+        public async Task<ActionResult> Delete(CRUDModel<CreatEditStudentCommond> value)
         {
-            await Mediator.SendAsync(new DeletStudentCommond() { StudentId = value.StudentId.Value });
+            await Mediator.SendAsync(new DeletStudentCommond() { StudentId = (int)value.Key });
             return Json(value);
         }
     }

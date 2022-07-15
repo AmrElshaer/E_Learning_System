@@ -11,8 +11,8 @@
     col.Field("Telephone").HeaderText("Telephone").Add();
     col.Field("StreetAddress").HeaderText("StreetAddress").Add();
 
-}).AllowPaging(true).AllowSorting(true).AllowFiltering(true).AllowPdfExport(true).AllowExcelExport(true).PageSettings(page => page.PageSize(10)).EditSettings(edit =>
-{ edit.AllowAdding(true).AllowEditing(true).AllowDeleting(true).Mode(Syncfusion.EJ2.Grids.EditMode.Dialog).Template("#dialogtemplate"); }).Toolbar(new List<string>() { "Add", "Edit", "Delete","PDF","Excel"}).Render()
+}).AllowPaging(true).AllowSorting(true).AllowPdfExport(true).AllowExcelExport(true).PageSettings(page => page.PageSize(10)).EditSettings(edit =>
+{ edit.AllowAdding(true).AllowEditing(true).AllowDeleting(true).Mode(Syncfusion.EJ2.Grids.EditMode.Dialog).Template("#dialogtemplate"); }).Toolbar(new List<string>() { "Add", "Edit", "Delete","Search", "Print", "PdfExport" }).Render()
 
 <script>
     function actionComplete(args) {
