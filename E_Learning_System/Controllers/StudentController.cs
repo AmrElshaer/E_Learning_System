@@ -5,7 +5,6 @@ using ELearning.Application.Student.Commonds.DeletStudent;
 using ELearning.Application.Student.Queries;
 using ELearning.Application.Student.Queries.GetStudents;
 using Syncfusion.EJ2.Base;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -22,27 +21,11 @@ namespace E_Learning_System.Controllers
         }
         public async Task<ActionResult> UrlDatasource(DataManagerRequest dm)
         {
-            var result = await Mediator.RequestAsync<GetStudentsQueries, QueryResult<StudentDto>>(new GetStudentsQueries());
-            var data = result.result.AsEnumerable();
-            DataOperations operation = new DataOperations();
-            if (dm.Sorted != null && dm.Sorted.Count > 0)// Sorting
-            {
-                data = operation.PerformSorting(data, dm.Sorted);
-            }
-            if (dm.Where != null && dm.Where.Count > 0)// Filtering
-            {
-                data = operation.PerformFiltering(data, dm.Where, dm.Where[0].Operator);
-            }
-            int count = data.Count();
-            if (dm.Skip != 0)
-                data = operation.PerformSkip(data, dm.Skip);
-            if (dm.Take != 0)
-                data = operation.PerformTake(data, dm.Take);
-
+            var result = await Mediator.RequestAsync<GetStudentsQueries, QueryResult<StudentDto>>(new GetStudentsQueries(dm));
             return Json(new
             {
-                result = data,
-                count = count
+                result = result.result,
+                count = result.count
             });
 
         }

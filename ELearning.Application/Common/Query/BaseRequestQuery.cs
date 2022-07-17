@@ -1,12 +1,14 @@
-﻿namespace ELearning.Application.Common.Query
+﻿using Syncfusion.EJ2.Base;
+
+namespace ELearning.Application.Common.Query
 {
     public class BaseRequestQuery
     {
-        public DataManager DM { get; set; } = new DataManager();
+        public DataManagerRequest DM { get; set; }
 
-        public BaseRequestQuery()
+        public BaseRequestQuery(DataManagerRequest dataManager)
         {
-
+            DM = dataManager == null ? new DataManagerRequest() : dataManager;
         }
     }
 }
