@@ -5,6 +5,7 @@ using ELearning.Application.Student.Commonds.DeletStudent;
 using ELearning.Application.Student.Queries;
 using ELearning.Application.Student.Queries.GetStudents;
 using Syncfusion.EJ2.Base;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -21,13 +22,38 @@ namespace E_Learning_System.Controllers
         }
         public async Task<ActionResult> UrlDatasource(DataManagerRequest dm)
         {
-            var result = await Mediator
-                .RequestAsync<GetStudentsQueries, QueryResult<StudentDto>>(new GetStudentsQueries()
-                {
-                    DM = new DataManager(dm.Take, dm.Skip, dm.Search?.FirstOrDefault()?.Key)
-                });
-            return Json(result);
+            var cachedData = Session["Students"] as IEnumerable<StudentDto>;
+            if (cachedData == null)
+            {
+                var result = await Mediator.RequestAsync<GetStudentsQueries, QueryResult<StudentDto>>(new GetStudentsQueries());
+                Session["Students"] = result.result;
+                cachedData = result.result;
+
+            }
+
+            DataOperations operation = new DataOperations();
+            if (dm.Sorted != null && dm.Sorted.Count > 0)// Sorting
+            {
+                cachedData = operation.PerformSorting(cachedData, dm.Sorted);
+            }
+            if (dm.Where != null && dm.Where.Count > 0)// Filtering
+            {
+                cachedData = operation.PerformFiltering(cachedData, dm.Where, dm.Where[0].Operator);
+            }
+            int count = cachedData.Count();
+            if (dm.Skip != 0)
+                cachedData = operation.PerformSkip(cachedData, dm.Skip);
+            if (dm.Take != 0)
+                cachedData = operation.PerformTake(cachedData, dm.Take);
+
+            return Json(new
+            {
+                result = cachedData,
+                count = count
+            });
+
         }
+
         [HttpPost]
         public ActionResult CreatEditPartial(CreatEditStudentCommond value)
         {
