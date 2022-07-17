@@ -4,7 +4,7 @@ using ELearning.Domain;
 using Mediator.Net.Context;
 using Mediator.Net.Contracts;
 using System.Collections.Generic;
-using System.Linq;
+using System.Data.Entity;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,17 +26,12 @@ namespace ELearning.Application.Student.Queries.GetStudents
 
             public async Task<QueryResult<StudentDto>> Handle(IReceiveContext<GetStudentsQueries> context, CancellationToken cancellationToken)
             {
-                var applyFilter = _context.Students
-                    .ApplyFiliter(context.Message, a => a.FirstName.Contains(context.Message.DM.SearchValue));
-                var count = applyFilter.Count();
-                var res = await applyFilter.ApplySkip(context.Message)
-                     .ApplyTake(context.Message)
-                     .Build(i => i.StudentId);
+                var students = await _context.Students.AsNoTracking().ToListAsync().ConfigureAwait(false);
                 return new QueryResult<StudentDto>()
                 {
-                    count = count,
+                    count = students.Count,
                     result
-                   = _mapper.Map<IList<StudentDto>>(res)
+                   = _mapper.Map<IList<StudentDto>>(students)
                 };
             }
         }
