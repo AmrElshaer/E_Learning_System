@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using ELearning.Application.Common;
 using ELearning.Application.Common.Mapping;
 using ELearning.Domain;
 using Mediator.Net;
@@ -12,12 +13,22 @@ namespace ELearning.Application
     {
         protected override void Load(ContainerBuilder builder)
         {
+
             builder.RegisterModule<AutoMapperModuel>();
             builder.RegisterModule<MediatRModule>();
             builder.RegisterType<StudentsEntities>().InstancePerRequest();
         }
 
     }
+    //internal class FluentValidationModule : Autofac.Module
+    //{
+    //    protected override void Load(ContainerBuilder builder)
+    //    {
+    //        builder.RegisterType<CreatEditStudentValidator>()
+    //            .Keyed<IValidator>(typeof(IValidator<CreatEditStudentCommond>))
+    //            .As<IValidator>();
+    //    }
+    //}
     internal class AutoMapperModuel : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -49,6 +60,10 @@ namespace ELearning.Application
         protected override void Load(ContainerBuilder builder)
         {
             var mediaBuilder = new MediatorBuilder();
+            mediaBuilder.ConfigureRequestPipe(x =>
+            {
+                x.UseRequestValidation();
+            });
             mediaBuilder.RegisterHandlers(typeof(ApplicationModule).Assembly);
             builder.RegisterMediator(mediaBuilder);
         }
