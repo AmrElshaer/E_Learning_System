@@ -1,30 +1,21 @@
-﻿using FluentValidation;
+﻿using Autofac;
+using FluentValidation;
 using System;
-using System.Collections.Generic;
 
 namespace ELearning.Application.Common.Exceptions
 {
-    public class ValidationFactory
+    public class AutofacValidatorFactory : ValidatorFactoryBase
     {
-        private static Dictionary<Type, IValidator> validators = new Dictionary<Type, IValidator>();
+        private readonly IContainer container;
 
-        static ValidationFactory()
+        public AutofacValidatorFactory(IContainer container)
         {
-            AssemblyScanner findValidatorsInAssembly = AssemblyScanner.FindValidatorsInAssembly(typeof(ApplicationModule).Assembly);
-            foreach (AssemblyScanner.AssemblyScanResult item in findValidatorsInAssembly)
-            {
-                validators.Add(item.InterfaceType.GenericTypeArguments[0], (IValidator < item.InterfaceType.GenericTypeArguments[0] >) item.ValidatorType as IValidator);
-            }
-
+            this.container = container;
         }
 
-        public IValidator GetValidator(Type request)
+        public override IValidator CreateInstance(Type validatorType)
         {
-            IValidator validator;
-            if (validators.TryGetValue(request, out validator))
-            {
-                return validator;
-            }
+            IValidator validator = container.ResolveOptionalKeyed<IValidator>(validatorType);
             return validator;
         }
     }

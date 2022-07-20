@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using AutoMapper;
-using ELearning.Application.Common;
 using ELearning.Application.Common.Mapping;
 using ELearning.Domain;
+using FluentValidation;
 using Mediator.Net;
 using Mediator.Net.Autofac;
 
@@ -16,19 +16,25 @@ namespace ELearning.Application
 
             builder.RegisterModule<AutoMapperModuel>();
             builder.RegisterModule<MediatRModule>();
+            builder.RegisterModule<FluentValidationModule>();
             builder.RegisterType<StudentsEntities>().InstancePerRequest();
         }
 
     }
-    //internal class FluentValidationModule : Autofac.Module
-    //{
-    //    protected override void Load(ContainerBuilder builder)
-    //    {
-    //        builder.RegisterType<CreatEditStudentValidator>()
-    //            .Keyed<IValidator>(typeof(IValidator<CreatEditStudentCommond>))
-    //            .As<IValidator>();
-    //    }
-    //}
+    internal class FluentValidationModule : Autofac.Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            AssemblyScanner findValidatorsInAssembly = AssemblyScanner.FindValidatorsInAssembly(typeof(ApplicationModule).Assembly);
+            foreach (AssemblyScanner.AssemblyScanResult item in findValidatorsInAssembly)
+            {
+                builder
+                    .RegisterType(item.ValidatorType)
+                    .Keyed<IValidator>(item.InterfaceType)
+                    .As<IValidator>();
+            }
+        }
+    }
     internal class AutoMapperModuel : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
@@ -60,10 +66,6 @@ namespace ELearning.Application
         protected override void Load(ContainerBuilder builder)
         {
             var mediaBuilder = new MediatorBuilder();
-            mediaBuilder.ConfigureRequestPipe(x =>
-            {
-                x.UseRequestValidation();
-            });
             mediaBuilder.RegisterHandlers(typeof(ApplicationModule).Assembly);
             builder.RegisterMediator(mediaBuilder);
         }

@@ -13,7 +13,6 @@ namespace E_Learning_System.Controllers
 
     public class StudentController : BaseController
     {
-
         // GET: Student
         public ActionResult Index()
         {
@@ -39,6 +38,15 @@ namespace E_Learning_System.Controllers
 
         public async Task<ActionResult> Save(CreatEditStudentCommond value)
         {
+            if (ModelState.IsValid)
+            {
+                // var failures = ModelState.SelectMany(result => result.Errors)
+                //.Where(f => f != null)
+                //.ToList();
+
+
+                //     throw new Application.Common.Exceptions.ValidationException(failures);
+            }
             value.StudentId = (await Mediator.RequestAsync<CreatEditStudentCommond, BaseEntity<int>>(value)).Id;
             return Json(value);
 
