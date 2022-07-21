@@ -6,8 +6,8 @@ namespace ELearning.Application.Student.Commonds.CreatEditStudent
     {
         public CreatEditStudentValidator()
         {
-            RuleFor(s => s.FirstName).NotEmpty();
-            RuleFor(s => s.LastName).NotEmpty();
+            RuleFor(s => s.FirstName).NotEmpty().MinimumLength(5);
+            RuleFor(s => s.LastName).NotEmpty().MinimumLength(5);
         }
     }
 }

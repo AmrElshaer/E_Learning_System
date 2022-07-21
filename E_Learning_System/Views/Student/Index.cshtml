@@ -4,7 +4,7 @@
 @Html.EJS().Grid("Grid").DataSource(dataManager =>
 {
     dataManager.Url("/Student/UrlDatasource").InsertUrl("/Student/Save").UpdateUrl("/Student/Save").RemoveUrl("/Student/Delete").Adaptor("UrlAdaptor");
-}).ActionComplete("actionComplete").AllowPdfExport().AllowExcelExport().ToolbarClick("toolbarClick").PdfExportComplete("pdfExportComplete").ExcelExportComplete("excelExportComplete").Columns(col =>
+}).ActionFailure("actionFailure").ActionComplete("actionComplete").AllowPdfExport().AllowExcelExport().ToolbarClick("toolbarClick").PdfExportComplete("pdfExportComplete").ExcelExportComplete("excelExportComplete").Columns(col =>
 {
 
     col.Field("StudentId").HeaderText("StudentId").IsPrimaryKey(true).Visible(false).Add();
@@ -19,6 +19,42 @@
     () { "Add", "Edit", "Delete", "Print", "PdfExport","ExcelExport" }).Render()
 
     <script>
+        function actionFailure(args) {
+            displayErrors(args);
+        }
+        function displayErrors(err) {
+            debugger;
+            if (err.error[0].error.status === 400 && IsJsonString(err.error[0].error.responseText)) {
+                $('.validErrorMess').remove();
+                const validationErrorDictionary = JSON.parse(err.error[0].error.responseText);
+                const errors = JSON.parse(validationErrorDictionary).error;
+                for (const fieldName in errors ) {
+                    if (errors.hasOwnProperty(fieldName)) {
+                        var validationEle = $(".e-gridform .form-row #" + fieldName);
+                        var spanEle = document.createElement("span");
+                        spanEle.textContent = '*' + errors[fieldName];
+                        spanEle.style.color = "red";
+                        spanEle.className = "validErrorMess";
+                        validationEle.parent().append(spanEle)
+                    }
+                }
+            }
+            else {
+                var validationEle = $(".e-edit-dialog");
+                var spanEle = document.createElement("span");
+                spanEle.textContent = '* Please Check Your Connection';
+                spanEle.style.color = "red";
+                validationEle.append(spanEle)
+            }
+        }
+        function IsJsonString(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
         function toolbarClick(args) {
             var gridObj = document.getElementById("Grid").ej2_instances[0];
             if (args.item.id === 'Grid_pdfexport') {
@@ -39,7 +75,7 @@
         function actionComplete(args) {
             console.log(args.rowData);
             if (args.requestType === 'insert') {
-
+                console.log("added");
             }
             if (args.requestType === 'beginEdit') {
                 var ajax = new ej.base.Ajax({
@@ -47,8 +83,7 @@
                     type: "POST",
                     contentType: "application/json",
                     data: JSON.stringify({ value: args.rowData })
-                });
-                console.log(args.rowData);
+                })
                 ajax.send().then(function (data) {
                     $("#dialogTemp").html(data); //Render the edit form with selected record
                     args.form.elements.namedItem('FirstName').focus();

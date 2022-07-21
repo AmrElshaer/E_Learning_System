@@ -22,6 +22,7 @@ namespace E_Learning_System
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterModule<ApplicationModule>();
@@ -32,6 +33,7 @@ namespace E_Learning_System
             ModelValidatorProviders.Providers.Add(fluentValidationModelValidatorProvider);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
+
     }
 
 }

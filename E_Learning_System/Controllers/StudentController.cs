@@ -1,4 +1,5 @@
-﻿using ELearning.Application.Common.Commond;
+﻿using E_Learning_System.App_Start;
+using ELearning.Application.Common.Commond;
 using ELearning.Application.Common.Query;
 using ELearning.Application.Student.Commonds.CreatEditStudent;
 using ELearning.Application.Student.Commonds.DeletStudent;
@@ -35,18 +36,11 @@ namespace E_Learning_System.Controllers
 
             return PartialView("_CreatEditPartial", value);
         }
-
+        [HttpPost]
+        [ValidationActionFilter]
         public async Task<ActionResult> Save(CreatEditStudentCommond value)
         {
-            if (ModelState.IsValid)
-            {
-                // var failures = ModelState.SelectMany(result => result.Errors)
-                //.Where(f => f != null)
-                //.ToList();
 
-
-                //     throw new Application.Common.Exceptions.ValidationException(failures);
-            }
             value.StudentId = (await Mediator.RequestAsync<CreatEditStudentCommond, BaseEntity<int>>(value)).Id;
             return Json(value);
 
