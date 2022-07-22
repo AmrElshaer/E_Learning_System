@@ -1,4 +1,4 @@
-﻿using E_Learning_System.App_Start;
+﻿using E_Learning_System.Attributes;
 using ELearning.Application.Common.Commond;
 using ELearning.Application.Common.Query;
 using ELearning.Application.Student.Commonds.CreatEditStudent;

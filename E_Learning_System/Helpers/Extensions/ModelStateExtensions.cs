@@ -8,27 +8,29 @@ namespace E_Learning_System.Helpers.Extensions
     {
         public static IDictionary<string, List<string>> AllErrors(this ModelStateDictionary modelState)
         {
-            var result = new Dictionary<string, List<string>>();
-            var erroneousFields = modelState.Where(ms => ms.Value.Errors.Any())
-                                            .Select(x => new { x.Key, x.Value.Errors });
+            return GetErros(modelState).GroupBy(a => a.Key)
+                .ToDictionary(a => a.Key,
+                a => a.Select(e => e.Error).ToList());
 
-            foreach (var erroneousField in erroneousFields)
-            {
-                var fieldKey = erroneousField.Key.Split('.')[1];
-                var fieldErrors = erroneousField.Errors.FirstOrDefault()?.ErrorMessage;
-                if (result.ContainsKey(fieldKey))
-                {
-                    result[fieldKey].Add(fieldErrors);
-                }
-                else
-                {
-                    var validation = new List<string>();
-                    validation.Add(fieldErrors);
-                    result.Add(fieldKey, validation);
-                }
-            }
-
-            return result;
         }
+
+        private static IEnumerable<ErrorResult> GetErros(ModelStateDictionary modelState)
+        {
+            return modelState.Where(ms => ms.Value.Errors.Any())
+                                              .Select(x => new ErrorResult(x.Key.Split('.')[1],
+                                              x.Value.Errors.FirstOrDefault().ErrorMessage));
+
+        }
+    }
+    class ErrorResult
+    {
+        public ErrorResult(string key, string error)
+        {
+            Key = key;
+            Error = error;
+        }
+
+        public string Key { get; set; }
+        public string Error { get; set; }
     }
 }

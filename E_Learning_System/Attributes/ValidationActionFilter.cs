@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Web.Mvc;
 
-namespace E_Learning_System.App_Start
+namespace E_Learning_System.Attributes
 {
     public class ValidationActionFilter : ActionFilterAttribute
     {
