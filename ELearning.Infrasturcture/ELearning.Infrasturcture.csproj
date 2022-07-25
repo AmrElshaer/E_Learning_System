@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4CEC8C63-7BDA-4FC5-8F1D-D96C846E7016}</ProjectGuid>
+    <ProjectGuid>{CB03A8B7-7545-481B-B5E6-225F00CFB11F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ELearning.Domain</RootNamespace>
-    <AssemblyName>ELearning.Domain</AssemblyName>
+    <RootNamespace>ELearning.Infrasturcture</RootNamespace>
+    <AssemblyName>ELearning.Infrasturcture</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -40,11 +40,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,98 +57,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applicant.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
+    <Compile Include="Identity\ApplicationDbContext.cs" />
+    <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Migrations\202207250907002_Init UsersTables.cs" />
+    <Compile Include="Migrations\202207250907002_Init UsersTables.designer.cs">
+      <DependentUpon>202207250907002_Init UsersTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="ClassStanding.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Cours.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CourseEnrollment.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="CourseOffering.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Degree.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DegreeLevel.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DegreeRequirement.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DegreeType.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Department.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ELearningModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ELearningModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ELearningModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ELearningModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ELearningModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Grade.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Student.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StudentProfile.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Term.cs">
-      <DependentUpon>ELearningModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="ELearningModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ELearningModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <EmbeddedResource Include="Migrations\202207250907002_Init UsersTables.resx">
+      <DependentUpon>202207250907002_Init UsersTables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="ELearningModel.edmx.diagram">
-      <DependentUpon>ELearningModel.edmx</DependentUpon>
-    </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ELearningModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ELearningModel.Context.cs</LastGenOutput>
-      <DependentUpon>ELearningModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="ELearningModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ELearningModel.edmx</DependentUpon>
-      <LastGenOutput>ELearningModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
