@@ -63,12 +63,19 @@
     <Compile Include="Migrations\202207250907002_Init UsersTables.designer.cs">
       <DependentUpon>202207250907002_Init UsersTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207271724190_AddImageInUser.cs" />
+    <Compile Include="Migrations\202207271724190_AddImageInUser.designer.cs">
+      <DependentUpon>202207271724190_AddImageInUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202207250907002_Init UsersTables.resx">
       <DependentUpon>202207250907002_Init UsersTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207271724190_AddImageInUser.resx">
+      <DependentUpon>202207271724190_AddImageInUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

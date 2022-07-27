@@ -3,6 +3,8 @@ using ELearning.Infrasturcture.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -77,6 +79,9 @@ namespace E_Learning_System.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindByEmailAsync(model.Email);
+                    Session["Image"] = user.Image;
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -147,14 +152,23 @@ namespace E_Learning_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+
+            var httpPostedFile = HttpContext.Request.Files["UploadFiles"];
+            if (httpPostedFile == null || httpPostedFile.ContentLength == 0)
+            {
+                ModelState.AddModelError("Image", "You Must Select Image");
+                return View(model);
+            }
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var reader = new BinaryReader(httpPostedFile.InputStream);
+                model.Image = Convert.ToBase64String(reader.ReadBytes((int)httpPostedFile.ContentLength));
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Image = model.Image };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
+                    Session["Image"] = model.Image;
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

@@ -1,5 +1,4 @@
-﻿using E_Learning_System.Models;
-using ELearning.Infrasturcture.Identity;
+﻿using ELearning.Infrasturcture.Identity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
