@@ -33,41 +33,35 @@ namespace ELearning.Application.Student.Queries.GetStudents
 
             public async Task<QueryResult<StudentDto>> Handle(IReceiveContext<GetStudentsQueries> context, CancellationToken cancellationToken)
             {
-                try
-                {
-                    var students = _context.Students.AsNoTracking().AsQueryable();
-                    var dm = context.Message.DM;
-                    DataOperations operation = new DataOperations();
-                    if (dm.Sorted == null)
-                    {
-                        students = students.OrderByDescending(s => s.StudentId);
-                    }
-                    if (dm.Sorted != null && dm.Sorted.Count > 0)// Sorting
-                    {
-                        students = operation.PerformSorting(students, dm.Sorted);
-                    }
-                    if (dm.Where != null && dm.Where.Count > 0)// Filtering
-                    {
-                        students = operation.PerformFiltering(students, dm.Where, dm.Where[0].Operator);
-                    }
-                    int count = students.Count();
-                    if (dm.Skip != 0)
-                        students = operation.PerformSkip(students, dm.Skip);
-                    if (dm.Take != 0)
-                        students = operation.PerformTake(students, dm.Take);
-                    var stdDtos = await students.ToListAsync();
-                    return new QueryResult<StudentDto>()
-                    {
-                        count = count,
-                        result
-                       = _mapper.Map<IList<StudentDto>>(stdDtos)
-                    };
-                }
-                catch (System.Exception ex)
-                {
 
-                    throw;
+                var students = _context.Students.AsNoTracking().AsQueryable();
+                var dm = context.Message.DM;
+                DataOperations operation = new DataOperations();
+                if (dm.Sorted == null)
+                {
+                    students = students.OrderByDescending(s => s.StudentId);
                 }
+                if (dm.Sorted != null && dm.Sorted.Count > 0)// Sorting
+                {
+                    students = operation.PerformSorting(students, dm.Sorted);
+                }
+                if (dm.Where != null && dm.Where.Count > 0)// Filtering
+                {
+                    students = operation.PerformFiltering(students, dm.Where, dm.Where[0].Operator);
+                }
+                int count = students.Count();
+                if (dm.Skip != 0)
+                    students = operation.PerformSkip(students, dm.Skip);
+                if (dm.Take != 0)
+                    students = operation.PerformTake(students, dm.Take);
+                var stdDtos = await students.ToListAsync();
+                return new QueryResult<StudentDto>()
+                {
+                    count = count,
+                    result
+                   = _mapper.Map<IList<StudentDto>>(stdDtos)
+                };
+
             }
         }
     }
