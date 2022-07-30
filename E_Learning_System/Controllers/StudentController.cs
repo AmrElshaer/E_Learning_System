@@ -17,7 +17,7 @@ namespace E_Learning_System.Controllers
         // GET: Student
         public ActionResult Index()
         {
-            return View();
+            return View()
         }
         public async Task<ActionResult> UrlDatasource(DataManagerRequest dm)
         {
