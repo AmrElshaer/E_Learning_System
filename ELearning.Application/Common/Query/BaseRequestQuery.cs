@@ -8,7 +8,7 @@ namespace ELearning.Application.Common.Query
 
         public BaseRequestQuery(DataManagerRequest dataManager)
         {
-            DM = dataManager == null ? new DataManagerRequest() : dataManager;
+            DM = dataManager ?? new DataManagerRequest();
         }
     }
 }

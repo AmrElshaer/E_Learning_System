@@ -106,18 +106,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperModuel.cs" />
     <Compile Include="Common\Commond\BaseEntity.cs" />
     <Compile Include="Common\Exceptions\ValidationResult.cs" />
     <Compile Include="Common\Exceptions\ValidationException.cs" />
-    <Compile Include="Common\Exceptions\ValidationFactory.cs" />
+    <Compile Include="Common\Exceptions\AutofacValidatorFactory.cs" />
+    <Compile Include="Common\Interfaces\IDataProcess.cs" />
     <Compile Include="Common\Mapping\IMapFrom.cs" />
     <Compile Include="Common\Mapping\MappingProfile.cs" />
     <Compile Include="Common\Query\BaseRequestQuery.cs" />
-    <Compile Include="Common\Query\DataManager.cs" />
+    <Compile Include="Common\Query\DataProcess.cs" />
     <Compile Include="Common\Query\QueryResult.cs" />
     <Compile Include="ApplicationModule.cs" />
+    <Compile Include="Course\Queries\CourseDto.cs" />
+    <Compile Include="Course\Queries\GetCourses\GetCouresesQueries.cs" />
     <Compile Include="Degree\Queries\DegreeDto.cs" />
     <Compile Include="Degree\Queries\GetDegrees\GetDegreesQueries.cs" />
+    <Compile Include="FluentValidationModule.cs" />
+    <Compile Include="MediatRModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommond.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommondHandler.cs" />
@@ -165,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\ej2\ej2.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Course\Commonds\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
