@@ -1,1 +1,59 @@
-﻿
+﻿@model  ELearning.Application.Course.Commonds.CreatEditCourse.CreatEditCourseCommond
+
+@using ELearning.Application.Degree.Queries.GetDegrees;
+@using ELearning.Application.Common.Query;
+@using Syncfusion.EJ2
+@using Mediator.Net
+@using System.Threading.Tasks
+@using ELearning.Application.Department.Queries.GetDepartments
+@using Syncfusion.EJ2.DropDowns
+@{
+    var mediator = DependencyResolver.Current.GetService<IMediator>();
+    var departments = Task.Run(() => mediator.RequestAsync<GetDepartmentQueries, QueryResult<ELearning.Application.Department.Queries.DepartmentDto>>(new GetDepartmentQueries())).GetAwaiter().GetResult();
+}
+<input style="display:none" name="CourseNumber" value="@Model.CourseNumber" />
+<div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="CourseTitle">
+                <input name="CourseTitle" value="@Model.CourseTitle" />
+                <span class="e-float-line"></span>
+                <label for="CourseTitle" class="e-float-text e-label-top">Title</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="CourseDescription">
+                <input name="CourseDescription" value="@Model.CourseDescription" />
+                <span class="e-float-line"></span>
+                <label for="CourseDescription" class="e-float-text e-label-top">Description</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="Credits">
+                <input name="Credits" value="@Model.Credits" />
+                <span class="e-float-line"></span>
+                <label for="Credits" class="e-float-text e-label-top">Credits</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="MaximumSectionSize">
+                <input name="MaximumSectionSize" value="@Model.MaximumSectionSize" />
+                <span class="e-float-line"></span>
+                <label for="MaximumSectionSize" class="e-float-text e-label-top">MaximumSectionSize</label>
+            </div>
+        </div>
+    </div>
+   
+   
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.EJS().DropDownList("DepartmentCode").Value(Model.DepartmentCode).DataSource(departments.result).Placeholder("Course").Fields(new DropDownListFieldSettings { Text = "DepartmentName", Value = "DepartmentCode" }).Render()
+
+        </div>
+    </div>
+</div>
+
+@Html.EJS().ScriptManager()

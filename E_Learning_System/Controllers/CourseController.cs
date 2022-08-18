@@ -3,8 +3,8 @@ using ELearning.Application.Common.Commond;
 using ELearning.Application.Common.Query;
 using ELearning.Application.Course.Commonds.CreatEditCourse;
 using ELearning.Application.Course.Commonds.DeleteCourse;
+using ELearning.Application.Course.Queries;
 using ELearning.Application.Course.Queries.GetCourses;
-using ELearning.Application.Student.Queries;
 using Syncfusion.EJ2.Base;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -20,7 +20,7 @@ namespace E_Learning_System.Controllers
         }
         public async Task<ActionResult> UrlDatasource(DataManagerRequest dm)
         {
-            var result = await Mediator.RequestAsync<GetCouresesQueries, QueryResult<StudentDto>>(new GetCouresesQueries(dm));
+            var result = await Mediator.RequestAsync<GetCouresesQueries, QueryResult<CourseDto>>(new GetCouresesQueries(dm));
             return Json(new
             {
                 result = result.result,

@@ -3,6 +3,9 @@ using ELearning.Application.Common.Commond;
 using ELearning.Domain;
 using Mediator.Net.Context;
 using Mediator.Net.Contracts;
+using Syncfusion.EJ2.Linq;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,26 +23,40 @@ namespace ELearning.Application.Course.Commonds.CreatEditCourse
 
         public async Task<BaseEntity<int>> Handle(IReceiveContext<CreatEditCourseCommond> context, CancellationToken cancellationToken)
         {
-            var req = context.Message;
-            ELearning.Domain.Cours cours;
-            if (req.CourseNumber.HasValue)
+            try
             {
-                var entity = await _dbContext.Courses.FindAsync(req.CourseNumber.Value);
-                Guard.Against.Null(entity, nameof(req.CourseNumber), "Not Found This Student");
-                cours = entity;
+                var req = context.Message;
+                ELearning.Domain.Cours cours;
+                if (req.CourseNumber.HasValue)
+                {
+                    var entity = await _dbContext.Courses.FirstOrDefaultAsync(c => c.CourseNumber == req.CourseNumber.Value);
+                    Guard.Against.Null(entity, nameof(req.CourseNumber), "Not Found This Student");
+                    cours = entity;
+                }
+                else
+                {
+                    cours = new Domain.Cours();
+                    cours.CourseNumber = await GenerateCourseNumber();
+                    _dbContext.Courses.Add(cours);
+                }
+                cours.CourseDescription = req.CourseDescription;
+                cours.CourseTitle = req.CourseTitle;
+                cours.MaximumSectionSize = req.MaximumSectionSize;
+                cours.DepartmentCode = req.DepartmentCode;
+                cours.Credits = req.Credits;
+                await _dbContext.SaveChangesAsync();
+                return new BaseEntity<int>(cours.CourseNumber);
             }
-            else
+            catch (System.Exception exception)
             {
-                cours = new Domain.Cours();
-                _dbContext.Courses.Add(cours);
+
+                throw;
             }
-            cours.CourseDescription = req.CourseDescription;
-            cours.CourseTitle = req.CourseTitle;
-            cours.MaximumSectionSize = req.MaximumSectionSize;
-            cours.DepartmentCode = req.DepartmentCode;
-            cours.Credits = req.Credits;
-            await _dbContext.SaveChangesAsync();
-            return new BaseEntity<int>(cours.CourseNumber);
+        }
+
+        private async Task<int> GenerateCourseNumber()
+        {
+            return (await _dbContext.Courses.OrderByDescending(c => c.CourseNumber).FirstOrDefaultAsync())?.CourseNumber + 1 ?? 1;
         }
     }
 }
