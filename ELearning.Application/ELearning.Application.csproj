@@ -138,34 +138,7 @@
     <Compile Include="Student\Queries\StudentDto.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ej2\bootstrap-dark.css" />
-    <Content Include="Content\ej2\bootstrap.css" />
-    <Content Include="Content\ej2\bootstrap4.css" />
-    <Content Include="Content\ej2\bootstrap5-dark.css" />
-    <Content Include="Content\ej2\bootstrap5.css" />
-    <Content Include="Content\ej2\compatibility\bootstrap.css" />
-    <Content Include="Content\ej2\compatibility\bootstrap4.css" />
-    <Content Include="Content\ej2\compatibility\fabric.css" />
-    <Content Include="Content\ej2\compatibility\highcontrast.css" />
-    <Content Include="Content\ej2\compatibility\material.css" />
-    <Content Include="Content\ej2\fabric-dark.css" />
-    <Content Include="Content\ej2\fabric.css" />
-    <Content Include="Content\ej2\fluent-dark.css" />
-    <Content Include="Content\ej2\fluent.css" />
-    <Content Include="Content\ej2\highcontrast.css" />
-    <Content Include="Content\ej2\material-dark.css" />
-    <Content Include="Content\ej2\material.css" />
-    <Content Include="Content\ej2\tailwind-dark.css" />
-    <Content Include="Content\ej2\tailwind.css" />
-    <Content Include="Scripts\ej2\ej2.min.js" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
-    <None Include="Content\ej2\compatibility\bootstrap.scss" />
-    <None Include="Content\ej2\compatibility\bootstrap4.scss" />
-    <None Include="Content\ej2\compatibility\fabric.scss" />
-    <None Include="Content\ej2\compatibility\highcontrast.scss" />
-    <None Include="Content\ej2\compatibility\material.scss" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +146,6 @@
       <Project>{4cec8c63-7bda-4fc5-8f1d-d96c846e7016}</Project>
       <Name>ELearning.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\ej2\ej2.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Department\Commonds\" />
