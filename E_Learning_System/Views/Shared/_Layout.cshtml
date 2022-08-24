@@ -5,46 +5,61 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title-ELearning</title>
+    @*google fonts cdn line*@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    @*Font awesome cdn link*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Syncfusion ASP.NET MVC controls styles -->
     <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/20.2.36/fluent.css" />
     <script src="https://cdn.syncfusion.com/ej2/20.2.36/dist/ej2.min.js"></script>
-    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="~/Content/Site.css"/>
+    
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("styles", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Student", "Index", "Student")</li>
-                    <li>@Html.ActionLink("Course", "Index", "Course")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
+    <header>
+        <div id="menu" class="fas fa-bars"></div>
+        <a href="#" class="logo"><i class="fas fa-user-graduate"></i>ELearning</a>
+        <nav class="navbar">
+            <ul>
+                <li><a class="active" href="/Home/Index">Home</a></li>
+                <li><a href="/Student/Index">Student</a></li>
+                <li><a href="/Course/Index">Course</a></li>
+                <li><a href="/Home/About">About</a></li>
+                <li><a href="/Home/Contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="login" class="fas fa-user-circle"></div>
+    </header>
+    <!-- login form  -->
+
+    <div class="login-form">
+
+        <form action="">
+            <h3>login</h3>
+            <input type="email" placeholder="username" class="box">
+            <input type="password" placeholder="password" class="box">
+            <p>forget password? <a href="#">click here</a></p>
+            <p>don't have an account? <a href="#">register now</a></p>
+            <input type="submit" class="btn" value="login">
+            <i class="fas fa-times"></i>
+        </form>
+
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+<section class="home">
+    @RenderBody()
+</section>
+<footer>
+    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+</footer>
     @Html.EJS().ScriptManager()
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/site.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
