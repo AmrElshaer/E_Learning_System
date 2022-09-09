@@ -19,8 +19,8 @@ namespace ELearning.Domain
         public int StudentId { get; set; }
         public string Grade { get; set; }
     
-        public virtual CourseOffering CourseOffering { get; set; }
         public virtual Grade Grade1 { get; set; }
         public virtual Student Student { get; set; }
+        public virtual CourseOffering CourseOffering { get; set; }
     }
 }

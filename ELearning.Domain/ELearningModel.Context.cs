@@ -28,8 +28,6 @@ namespace ELearning.Domain
         public virtual DbSet<Applicant> Applicants { get; set; }
         public virtual DbSet<ClassStanding> ClassStandings { get; set; }
         public virtual DbSet<CourseEnrollment> CourseEnrollments { get; set; }
-        public virtual DbSet<CourseOffering> CourseOfferings { get; set; }
-        public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<DegreeLevel> DegreeLevels { get; set; }
         public virtual DbSet<DegreeRequirement> DegreeRequirements { get; set; }
         public virtual DbSet<Degree> Degrees { get; set; }
@@ -41,5 +39,7 @@ namespace ELearning.Domain
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Term> Terms { get; set; }
+        public virtual DbSet<CourseOffering> CourseOfferings { get; set; }
+        public virtual DbSet<Cours> Courses { get; set; }
     }
 }

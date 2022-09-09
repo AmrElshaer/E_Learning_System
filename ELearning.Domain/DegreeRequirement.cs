@@ -22,7 +22,6 @@ namespace ELearning.Domain
         public int CourseNumber { get; set; }
     
         public virtual ClassStanding ClassStanding { get; set; }
-        public virtual Cours Cours { get; set; }
         public virtual Degree Degree { get; set; }
         public virtual Session Session { get; set; }
     }

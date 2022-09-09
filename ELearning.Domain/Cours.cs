@@ -18,7 +18,6 @@ namespace ELearning.Domain
         public Cours()
         {
             this.CourseOfferings = new HashSet<CourseOffering>();
-            this.DegreeRequirements = new HashSet<DegreeRequirement>();
         }
     
         public string DepartmentCode { get; set; }
@@ -30,8 +29,5 @@ namespace ELearning.Domain
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseOffering> CourseOfferings { get; set; }
-        public virtual Department Department { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DegreeRequirement> DegreeRequirements { get; set; }
     }
 }

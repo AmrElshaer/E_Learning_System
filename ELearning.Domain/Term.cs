@@ -27,8 +27,8 @@ namespace ELearning.Domain
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applicant> Applicants { get; set; }
+        public virtual Session Session { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseOffering> CourseOfferings { get; set; }
-        public virtual Session Session { get; set; }
     }
 }
