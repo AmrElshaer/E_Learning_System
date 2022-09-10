@@ -38,8 +38,8 @@ namespace ELearning.Domain
         public virtual DbSet<StudentProfile> StudentProfiles { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<Term> Terms { get; set; }
-        public virtual DbSet<CourseOffering> CourseOfferings { get; set; }
         public virtual DbSet<Cours> Courses { get; set; }
+        public virtual DbSet<CourseOffering> CourseOfferings { get; set; }
+        public virtual DbSet<Term> Terms { get; set; }
     }
 }

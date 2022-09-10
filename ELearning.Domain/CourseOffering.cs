@@ -21,10 +21,10 @@ namespace ELearning.Domain
         }
     
         public int CourseOfferingId { get; set; }
-        public string TermCode { get; set; }
         public int Section { get; set; }
         public int Capacity { get; set; }
         public int CourseNumber { get; set; }
+        public Nullable<int> TermId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseEnrollment> CourseEnrollments { get; set; }

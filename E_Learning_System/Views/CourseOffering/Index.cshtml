@@ -1,0 +1,143 @@
+﻿@using Syncfusion.EJ2
+
+
+@Html.EJS().Grid("Grid").DataSource(dataManager =>
+{
+    dataManager.Url("/CourseOffering/UrlDatasource").InsertUrl("/CourseOffering/Save").UpdateUrl("/CourseOffering/Save").RemoveUrl("/CourseOffering/Delete").Adaptor("UrlAdaptor");
+}).ActionFailure("actionFailure").ActionComplete("actionComplete").AllowPdfExport().AllowExcelExport().ToolbarClick("toolbarClick").PdfExportComplete("pdfExportComplete").ExcelExportComplete("excelExportComplete").Columns(col =>
+{
+
+    col.Field("CourseOfferingId").HeaderText("CourseOfferingId").IsPrimaryKey(true).Visible(false).Add();
+    col.Field("CourseName").HeaderText("CourseName").Add();
+    col.Field("TermCode").HeaderText("TermCode").Add();
+    col.Field("Section").HeaderText("Section").Add();
+    col.Field("Capacity").HeaderText("Capacity").Add();
+    col.Field("CourseNumber").HeaderText("CourseNumber").Visible(false).Add();
+    col.Field("TermId").HeaderText("TermId").Visible(false).Add();
+
+
+}).AllowPaging().AllowSorting().AllowFiltering().FilterSettings(fliter => { fliter.Type(Syncfusion.EJ2.Grids.FilterType.Menu); }).AllowPdfExport().AllowExcelExport().PageSettings(page => page.PageSize(10)).EditSettings(edit =>
+{ edit.AllowAdding(true).AllowEditing(true).AllowDeleting(true).Mode(Syncfusion.EJ2.Grids.EditMode.Dialog).Template("#dialogtemplate"); }).Toolbar(new List<string>
+    () { "Add", "Edit", "Delete", "Print", "PdfExport", "ExcelExport" }).Render()
+
+<script>
+        function actionFailure(args) {
+            displayErrors(args);
+        }
+        function displayErrors(err) {
+            debugger;
+            if (err.error[0].error.status === 400 && IsJsonString(err.error[0].error.responseText)) {
+                $('.validErrorMess').remove();
+                const validationErrorDictionary = JSON.parse(err.error[0].error.responseText);
+                const errors = JSON.parse(validationErrorDictionary).error;
+                for (const fieldName in errors ) {
+                    if (errors.hasOwnProperty(fieldName)) {
+                        var validationEle = $(".e-gridform .form-row #" + fieldName);
+                        var spanEle = document.createElement("span");
+                        spanEle.textContent = '*' + errors[fieldName];
+                        spanEle.style.color = "red";
+                        spanEle.className = "validErrorMess";
+                        validationEle.parent().append(spanEle)
+                    }
+                }
+            }
+            else {
+                var validationEle = $(".e-edit-dialog");
+                var spanEle = document.createElement("span");
+                spanEle.textContent = '* Please Check Your Connection';
+                spanEle.style.color = "red";
+                validationEle.append(spanEle)
+            }
+        }
+        function IsJsonString(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+        function toolbarClick(args) {
+            var gridObj = document.getElementById("Grid").ej2_instances[0];
+            if (args.item.id === 'Grid_pdfexport') {
+                var exportProperties = {
+                    header: {
+                        fromTop: 0,
+                        height: 80,
+                        contents: [
+                            {
+                                type: 'Text',
+                                value: "E-Learning",
+                                position: { x: 0, y: 50 },
+                                style: { textBrushColor: '#000000', fontSize: 13 }
+                            },
+
+                        ]
+                    },
+                    footer: {
+                        fromBottom: 60,
+                        height: 50,
+                        contents: [
+                            {
+                                type: 'PageNumber',
+                                pageNumberType: 'english',
+                                format: 'Page {$current} of {$total}',
+                                position: { x: 0, y: 25 },
+                                style: { textBrushColor: '#000000', fontSize: 15 }
+                            }
+                        ]
+                    }
+                }
+                gridObj.showSpinner();
+                gridObj.pdfExport(exportProperties);
+            }
+            else if (args.item.id === 'Grid_excelexport') {
+                gridObj.showSpinner();
+                gridObj.excelExport();
+            }
+        }
+        function pdfExportComplete(args) {
+            this.hideSpinner();
+        }
+        function excelExportComplete(args) {
+            this.hideSpinner();
+        }
+        function actionComplete(args) {
+            console.log(args.rowData);
+            if (args.requestType === 'insert') {
+                console.log("added");
+            }
+            if (args.requestType === 'beginEdit') {
+                var ajax = new ej.base.Ajax({
+                    url: "/CourseOffering/CreatEditpartial", //render the partial view
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ value: args.rowData })
+                })
+                ajax.send().then(function (data) {
+                    $("#dialogTemp").html(data); //Render the edit form with selected record
+                    args.form.elements.namedItem('FirstName').focus();
+                }).catch(function (xhr) {
+                    console.log(xhr);
+                });
+            }
+            if (args.requestType === 'add') {
+                var ajax = new ej.base.Ajax({
+                    url: "/CourseOffering/CreatEditpartial", //render the partial view
+                    type: "POST",
+                    contentType: "application/json",
+                });
+                ajax.send().then(function (data) {
+                    $("#dialogTemp").html(data); //Render the edit form with selected record
+                    args.form.elements.namedItem().focus();
+                }).catch(function (xhr) {
+                    console.log(xhr);
+                });
+            }
+        }
+</script>
+
+<script id='dialogtemplate' type="text/x-template">
+    <div id="dialogTemp">
+    </div>
+</script>

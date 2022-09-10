@@ -1,0 +1,47 @@
+﻿@model  ELearning.Application.CourseOffering.Commonds.CreatEditCourseOffering.CreatEditCoursOfferingCommond
+@using ELearning.Application.Common.Query;
+@using Syncfusion.EJ2
+@using Mediator.Net
+@using System.Threading.Tasks
+@using ELearning.Application.Course.Queries.GetCourses
+@using ELearning.Application.Term.Queries
+@using Syncfusion.EJ2.DropDowns
+
+@{
+    var mediator = DependencyResolver.Current.GetService<IMediator>();
+    var terms = Task.Run(() => mediator.RequestAsync<GetTermQueries, QueryResult<TermDto>>(new GetTermQueries())).GetAwaiter().GetResult();
+    var courses = Task.Run(() => mediator.RequestAsync<GetCouresesQueries, QueryResult<ELearning.Application.Course.Queries.CourseDto>>(new GetCouresesQueries())).GetAwaiter().GetResult();
+}
+<input style="display:none" name="StudentId" value="@Model" />
+<div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="Section">
+                <input name="Section" value="@Model.Section" />
+                <span class="e-float-line"></span>
+                <label for="Section" class="e-float-text e-label-top">Section</label>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="Capacity">
+                <input name="Capacity" value="@Model.Capacity" />
+                <span class="e-float-line"></span>
+                <label for="Capacity" class="e-float-text e-label-top">Capacity</label>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.EJS().DropDownList("CourseNumber").Value(Model.CourseNumber).DataSource(courses.result).Placeholder("Course").Fields(new DropDownListFieldSettings { Text = "CourseTitle", Value = "CourseNumber" }).Render()
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.EJS().DropDownList("TermId").Value(Model.TermId).DataSource(terms.result).Placeholder("Term").Fields(new DropDownListFieldSettings { Text = "TermCode", Value = "TermId" }).Render()
+
+        </div>
+    </div>
+</div>
+
+@Html.EJS().ScriptManager()

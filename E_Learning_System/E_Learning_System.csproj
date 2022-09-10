@@ -226,6 +226,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
+    <Compile Include="Controllers\CourseOfferingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -328,6 +329,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Course\Index.cshtml" />
     <Content Include="Views\Course\_CreatEditPartial.cshtml" />
+    <Content Include="Views\CourseOffering\Index.cshtml" />
+    <Content Include="Views\CourseOffering\_CreatEditPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

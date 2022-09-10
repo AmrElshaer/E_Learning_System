@@ -36,7 +36,5 @@ namespace ELearning.Domain
         public Nullable<int> EssayScore { get; set; }
         public string ApplicationStatus { get; set; }
         public Nullable<double> AdmissionPoints { get; set; }
-    
-        public virtual Term Term { get; set; }
     }
 }

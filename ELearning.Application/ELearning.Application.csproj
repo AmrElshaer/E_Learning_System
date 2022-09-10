@@ -118,6 +118,11 @@
     <Compile Include="Common\Query\DataProcess.cs" />
     <Compile Include="Common\Query\QueryResult.cs" />
     <Compile Include="ApplicationModule.cs" />
+    <Compile Include="CourseOffering\Commonds\CreatEditCourseOffering\CreatEditCoursOfferingCommond.cs" />
+    <Compile Include="CourseOffering\Commonds\CreatEditCourseOffering\CreatEditCoursOfferingCommondHandler.cs" />
+    <Compile Include="CourseOffering\Commonds\DeletCourseOffering\DeletCoursOfferingCommond.cs" />
+    <Compile Include="CourseOffering\Queries\CourseOfferingDto.cs" />
+    <Compile Include="CourseOffering\Queries\GetCourseOffering\GetCourseOfferingQueries.cs" />
     <Compile Include="Course\Commonds\CreatEditCourse\CreatEditCourseCommond.cs" />
     <Compile Include="Course\Commonds\CreatEditCourse\CreatEditCourseCommondHandler.cs" />
     <Compile Include="Course\Commonds\DeleteCourse\DeleteCourseCommond.cs" />
@@ -136,6 +141,8 @@
     <Compile Include="Student\Commonds\DeletStudent\DeletStudentCommond.cs" />
     <Compile Include="Student\Queries\GetStudents\GetStudentsQueries.cs" />
     <Compile Include="Student\Queries\StudentDto.cs" />
+    <Compile Include="Term\Queries\GetTermQueries.cs" />
+    <Compile Include="Term\Queries\TermDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

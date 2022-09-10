@@ -18,8 +18,6 @@
         <EntityTypeShape EntityType="StudentsModel.StudentProfile" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentsModel.Student" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StudentsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StudentsModel.Term" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <AssociationConnector Association="StudentsModel.fk_applicants_entry_term" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_class_stdgs_degree_level_cd" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_DegreeReqirements_ClassStandingCode" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_Students_ClassStanding" ManuallyRouted="false" />
@@ -31,12 +29,13 @@
         <AssociationConnector Association="StudentsModel.fk_degrees_DegreeTypeCode" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_degrees_DepartmentCode" ManuallyRouted="false" />
         <AssociationConnector Association="StudentsModel.fk_Students_DegreePursued" ManuallyRouted="false" />
-        <AssociationConnector Association="StudentsModel.fk_Terms_SessionCode" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="StudentsModel.CourseOffering" Width="1.5" PointX="8.25" PointY="13.125" />
         <EntityTypeShape EntityType="StudentsModel.Cours" Width="1.5" PointX="6" PointY="8.25" />
+        <EntityTypeShape EntityType="StudentsModel.CourseOffering" Width="1.5" PointX="8.25" PointY="12.875" />
+        <EntityTypeShape EntityType="StudentsModel.Term" Width="1.5" PointX="3" PointY="13.75" />
         <AssociationConnector Association="StudentsModel.fk_CourseEnrollments_CourseOfferings" />
         <AssociationConnector Association="StudentsModel.FK_CourseOfferings_Courses" />
-        <AssociationConnector Association="StudentsModel.fk_CourseOfferings_TermCode" />
+        <AssociationConnector Association="StudentsModel.FK_CourseOfferings_Terms" />
+        <AssociationConnector Association="StudentsModel.fk_Terms_SessionCode" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
