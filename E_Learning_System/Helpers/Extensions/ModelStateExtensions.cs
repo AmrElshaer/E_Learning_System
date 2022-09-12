@@ -8,6 +8,7 @@ namespace E_Learning_System.Helpers.Extensions
     {
         public static IDictionary<string, List<string>> AllErrors(this ModelStateDictionary modelState)
         {
+
             return GetErros(modelState).GroupBy(a => a.Key)
                 .ToDictionary(a => a.Key,
                 a => a.Select(e => e.Error).ToList());
@@ -17,8 +18,8 @@ namespace E_Learning_System.Helpers.Extensions
         private static IEnumerable<ErrorResult> GetErros(ModelStateDictionary modelState)
         {
             return modelState.Where(ms => ms.Value.Errors.Any())
-                                              .Select(x => new ErrorResult(x.Key.Split('.')[1],
-                                              x.Value.Errors.FirstOrDefault().ErrorMessage));
+                                              .Select(x => new ErrorResult(x.Key.Contains('.') ? x.Key.Split('.')[1] : "",
+                                              x.Value.Errors.FirstOrDefault()?.ErrorMessage));
 
         }
     }

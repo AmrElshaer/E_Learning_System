@@ -120,6 +120,7 @@
     <Compile Include="ApplicationModule.cs" />
     <Compile Include="CourseEnrollment\Commonds\CreatEditCoursEnrollment\CreatEditCoursEnrollCommondHandler.cs" />
     <Compile Include="CourseEnrollment\Commonds\CreatEditCoursEnrollment\CreatEditCoursEnrollmentCommond.cs" />
+    <Compile Include="CourseEnrollment\Commonds\CreatEditCoursEnrollment\CreatEditCoursEnrollValidation.cs" />
     <Compile Include="CourseEnrollment\Commonds\DeletCoursEnrollment\DeletCoursEnrollCommond.cs" />
     <Compile Include="CourseEnrollment\Queries\CourseEnrollmentDto.cs" />
     <Compile Include="CourseEnrollment\Queries\GetCoursesEnrollment\GetCoursesEnrollQueries.cs" />

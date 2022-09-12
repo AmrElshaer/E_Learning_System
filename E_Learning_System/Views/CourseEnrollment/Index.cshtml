@@ -87,24 +87,31 @@
             $('.validErrorMess').remove();
             const validationErrorDictionary = JSON.parse(err.error[0].error.responseText);
             const errors = JSON.parse(validationErrorDictionary).error;
-            for (const fieldName in errors ) {
+            console.log(errors);
+            for (const fieldName in errors) {
+                if (fieldName=="") {
+                    creatValidationMessage(errors[fieldName]);
+                }
                 if (errors.hasOwnProperty(fieldName)) {
                     var validationEle = $(".e-gridform .form-row #" + fieldName);
                     var spanEle = document.createElement("span");
                     spanEle.textContent = '*' + errors[fieldName];
                     spanEle.style.color = "red";
                     spanEle.className = "validErrorMess";
-                    validationEle.parent().append(spanEle)
-                }
+                    validationEle.parent().append(spanEle);
+                } 
             }
         }
         else {
-            var validationEle = $(".e-edit-dialog");
-            var spanEle = document.createElement("span");
-            spanEle.textContent = '* Please Check Your Connection';
-            spanEle.style.color = "red";
-            validationEle.append(spanEle)
+            creatValidationMessage('* Please Check Your Connection');
         }
+    }
+    function creatValidationMessage(message) {
+        var validationEle = $(".e-edit-dialog");
+        var spanEle = document.createElement("span");
+        spanEle.textContent = message;
+        spanEle.style.color = "red";
+        validationEle.append(spanEle);
     }
     function IsJsonString(str) {
         try {
