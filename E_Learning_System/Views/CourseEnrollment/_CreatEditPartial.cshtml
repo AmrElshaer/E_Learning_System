@@ -1,0 +1,67 @@
+﻿@model  ELearning.Application.CourseEnrollment.Queries.CourseEnrollmentDto
+@using Syncfusion.EJ2
+@using Mediator.Net
+@{
+    var mediator = DependencyResolver.Current.GetService<IMediator>();
+}
+<input style="display:none" name="CourseEnrollmentId" value="@Model.CourseEnrollmentId" />
+<input style="display:none" name="StudentId" id="StudentId" value="@Model.StudentId" />
+<input style="display:none" name="CourseOfferingId" id="CourseOfferingId" value="@Model.CourseOfferingId" />
+<div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <input disabled="disabled" id="courseName" value="@Model.CourseName" class="searchField" type="text" placeholder="Course Offering">
+            <button id="searchForCourseOffering" class="searchBtn" type="button"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+
+    <div>
+        <input disabled="disabled" id="studentName" value="@Model.StudentName" class="searchField" type="text" placeholder="Student">
+        <button id="myBtn" type="button" class="searchBtn"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <div class="e-float-input e-control-wrapper" id="Grade">
+                <input name="Grade" value="@Model.Grade"/>
+                <span class="e-float-line"></span>
+                <label for="Grade" class="e-float-text e-label-top">Grade</label>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<!-- The Modal -->
+<div id="coursOfferingModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div id="courseOfferingGrid">
+
+            @Html.Partial("_CourseOfferingGrid")
+
+        </div>
+    </div>
+
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div id="studentGrid">
+
+            @Html.Partial("_StudentGrid")
+
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/model.js"></script>
+<script>
+    initModel("myModal", "myBtn");
+    initModel("coursOfferingModal", "searchForCourseOffering");
+
+</script>
+@Html.EJS().ScriptManager()

@@ -1,0 +1,25 @@
+﻿@using Syncfusion.EJ2
+@Html.EJS().Grid("StudentGrid").RowSelected("rowSelected").AllowSelection().DataSource(dataManager =>
+{
+    dataManager.Url("/Student/UrlDatasource").InsertUrl("/Student/Save").UpdateUrl("/Student/Save").RemoveUrl("/Student/Delete").Adaptor("UrlAdaptor");
+}).Columns(col =>
+{
+
+    col.Field("StudentId").HeaderText("StudentId").IsPrimaryKey(true).Visible(false).Add();
+    col.Field("FirstName").HeaderText("FirstName").Add();
+    col.Field("LastName").HeaderText("LastName").Add();
+    col.Field("email").HeaderText("Email").Add();
+    col.Field("Telephone").HeaderText("Telephone").Add();
+    col.Field("StreetAddress").HeaderText("StreetAddress").Add();
+
+}).AllowPaging().AllowSorting().AllowFiltering().FilterSettings(fliter => { fliter.Type(Syncfusion.EJ2.Grids.FilterType.Menu); }).PageSettings(page => page.PageSize(10)).Render()
+<script>
+    function rowSelected(args) {
+        var grid = document.getElementById("StudentGrid").ej2_instances[0];
+        var selectedrecord = grid.getSelectedRecords()[0];  // get the selected records.
+        $('#studentName').val(`${selectedrecord.FirstName} ${selectedrecord.LastName}`);
+        $('#StudentId').val(selectedrecord.StudentId);
+        console.log(selectedrecord.StudentId);
+        document.getElementById("myModal").style.display = "none";
+    }
+</script>

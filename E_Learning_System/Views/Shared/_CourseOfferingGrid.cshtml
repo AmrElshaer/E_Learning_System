@@ -1,0 +1,29 @@
+﻿@using Syncfusion.EJ2
+
+
+@Html.EJS().Grid("CourseOfferingGrid").RowSelected("rowSelectedCourseOffering").AllowSelection().DataSource(dataManager =>
+{
+    dataManager.Url("/CourseOffering/UrlDatasource").Adaptor("UrlAdaptor");
+}).Columns(col =>
+{
+
+    col.Field("CourseOfferingId").HeaderText("CourseOfferingId").IsPrimaryKey(true).Visible(false).Add();
+    col.Field("CourseName").HeaderText("CourseName").Add();
+    col.Field("TermCode").HeaderText("TermCode").Add();
+    col.Field("Section").HeaderText("Section").Add();
+    col.Field("Capacity").HeaderText("Capacity").Add();
+    col.Field("CourseNumber").HeaderText("CourseNumber").Visible(false).Add();
+    col.Field("TermId").HeaderText("TermId").Visible(false).Add();
+
+
+}).AllowPaging().AllowSorting().AllowFiltering().FilterSettings(fliter => { fliter.Type(Syncfusion.EJ2.Grids.FilterType.Menu); }).PageSettings(page => page.PageSize(10)).Render()
+<script>
+    function rowSelectedCourseOffering(args) {
+        var grid = document.getElementById("CourseOfferingGrid").ej2_instances[0];
+        var selectedrecord = grid.getSelectedRecords()[0]; 
+        console.log(selectedrecord);
+        $('#courseName').val(selectedrecord.CourseName);
+        $('#CourseOfferingId').val(selectedrecord.CourseOfferingId);
+        document.getElementById("coursOfferingModal").style.display = "none";
+    }
+</script>
