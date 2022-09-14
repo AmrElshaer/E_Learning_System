@@ -12,6 +12,8 @@ namespace ELearning.Domain
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class StudentsEntities : DbContext
     {
@@ -41,5 +43,18 @@ namespace ELearning.Domain
         public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<CourseOffering> CourseOfferings { get; set; }
         public virtual DbSet<Term> Terms { get; set; }
+    
+        public virtual ObjectResult<GetEnrollMentStudentReport_Result> GetEnrollMentStudentReport(string firstName, string lastName)
+        {
+            var firstNameParameter = firstName != null ?
+                new ObjectParameter("firstName", firstName) :
+                new ObjectParameter("firstName", typeof(string));
+    
+            var lastNameParameter = lastName != null ?
+                new ObjectParameter("lastName", lastName) :
+                new ObjectParameter("lastName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEnrollMentStudentReport_Result>("GetEnrollMentStudentReport", firstNameParameter, lastNameParameter);
+        }
     }
 }

@@ -98,6 +98,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ELearningModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GetEnrollMentStudentReport_Result.cs">
+      <DependentUpon>ELearningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Grade.cs">
       <DependentUpon>ELearningModel.tt</DependentUpon>
     </Compile>

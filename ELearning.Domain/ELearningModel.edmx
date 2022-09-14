@@ -355,6 +355,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetEnrollMentStudentReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="firstName" Type="varchar" Mode="In" />
+          <Parameter Name="lastName" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="StudentsModelStoreContainer">
           <EntitySet Name="Applicants" EntityType="Self.Applicants" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClassStandings" EntityType="Self.ClassStandings" Schema="dbo" store:Type="Tables" />
@@ -810,6 +814,10 @@
             <End Role="Session" EntitySet="Sessions" />
             <End Role="Term" EntitySet="Terms" />
           </AssociationSet>
+          <FunctionImport Name="GetEnrollMentStudentReport" ReturnType="Collection(StudentsModel.GetEnrollMentStudentReport_Result)">
+            <Parameter Name="firstName" Mode="In" Type="String" />
+            <Parameter Name="lastName" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Cours">
           <Key>
@@ -895,6 +903,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetEnrollMentStudentReport_Result">
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="CourseTitle" Nullable="true" MaxLength="64" />
+          <Property Type="String" Name="Grade" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="TermCode" Nullable="true" MaxLength="6" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1087,6 +1102,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetEnrollMentStudentReport" FunctionName="StudentsModel.Store.GetEnrollMentStudentReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentsModel.GetEnrollMentStudentReport_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="TermCode" ColumnName="TermCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -124,6 +124,8 @@
     <Compile Include="CourseEnrollment\Commonds\DeletCoursEnrollment\DeletCoursEnrollCommond.cs" />
     <Compile Include="CourseEnrollment\Queries\CourseEnrollmentDto.cs" />
     <Compile Include="CourseEnrollment\Queries\GetCoursesEnrollment\GetCoursesEnrollQueries.cs" />
+    <Compile Include="CourseEnrollment\Queries\GetStudentEnrollMentReport\GetStudentEnrollmentReportQuery.cs" />
+    <Compile Include="CourseEnrollment\Queries\GetStudentEnrollMentReport\StudentEnrollmentReportModel.cs" />
     <Compile Include="CourseOffering\Commonds\CreatEditCourseOffering\CreatEditCoursOfferingCommond.cs" />
     <Compile Include="CourseOffering\Commonds\CreatEditCourseOffering\CreatEditCoursOfferingCommondHandler.cs" />
     <Compile Include="CourseOffering\Commonds\DeletCourseOffering\DeletCoursOfferingCommond.cs" />

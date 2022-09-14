@@ -5,17 +5,44 @@ using ELearning.Application.CourseEnrollment.Commonds.CreatEditCoursEnrollment;
 using ELearning.Application.CourseEnrollment.Commonds.DeletCoursEnrollment;
 using ELearning.Application.CourseEnrollment.Queries;
 using ELearning.Application.CourseEnrollment.Queries.GetCoursesEnrollment;
+using ELearning.Application.CourseEnrollment.Queries.GetStudentEnrollMentReport;
+using MvcRazorToPdf;
 using Syncfusion.EJ2.Base;
+using Syncfusion.EJ2.Linq;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace E_Learning_System.Controllers
 {
+
     public class CourseEnrollmentController : BaseController
     {
         public ActionResult Index()
         {
             return View();
+        }
+        [HttpGet]
+        public async Task<ActionResult> EnrollmentReport(GetStudentEnrollmentReportQuery queries)
+        {
+            var report = await Mediator.RequestAsync<GetStudentEnrollmentReportQuery, QueryResult<StudentEnrollmentReportModel>>(queries);
+            var model = new PdfExample<StudentEnrollmentReportModel>
+            {
+                Heading = "Courses Enrollment",
+                Items = report.result.ToList()
+            };
+            return new PdfActionResult(model);
+            //try
+            //{
+            //    var report=await Mediator.RequestAsync<GetStudentEnrollmentReportQuery, QueryResult<StudentEnrollmentReportModel>>(queries);
+            //    return new PdfActionResult(report.result);
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //    throw;
+            //}
         }
         public async Task<ActionResult> UrlDatasource(DataManagerRequest dm)
         {
@@ -48,5 +75,11 @@ namespace E_Learning_System.Controllers
             await Mediator.SendAsync(new DeletCoursEnrollCommond() { CourseEnrollId = (int)value.Key });
             return Json(value);
         }
+    }
+
+    public class PdfExample<T>
+    {
+        public string Heading { get; set; }
+        public List<T> Items { get; set; }
     }
 }

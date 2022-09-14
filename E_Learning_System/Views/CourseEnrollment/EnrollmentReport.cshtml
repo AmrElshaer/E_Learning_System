@@ -1,0 +1,28 @@
+﻿@model  E_Learning_System.Controllers.PdfExample<ELearning.Application.CourseEnrollment.Queries.GetStudentEnrollMentReport.StudentEnrollmentReportModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+}
+<div class="header">
+    <p class="header-content">@Model.Heading</p>
+</div>
+
+<table>
+    <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>CourseTitle</th>
+        <th>Term</th>
+        <th>Grade</th>
+    </tr>
+    @foreach (var item in Model.Items)
+    {
+        <tr>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.CourseTitle</td>
+            <td>@item.TermCode</td>
+            <td>@item.Grade</td>
+        </tr>
+    }
+</table>
