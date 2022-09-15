@@ -37,13 +37,8 @@ namespace E_Learning_System.Controllers
                 {
                     lr.ReportPath = path;
                 }
-               // var report = await Mediator.RequestAsync<GetStudentEnrollmentReportBerYearQuery, QueryResult<CountCourseStudentsEnrollModel>>(queries);
-               List<CountCourseStudentsEnrollModel> data = new List<CountCourseStudentsEnrollModel>()
-               {
-                   new CountCourseStudentsEnrollModel(){CourseTitle = "DotNet",NumOfStudentEnroll = 25},
-                   new CountCourseStudentsEnrollModel(){CourseTitle = "Js",NumOfStudentEnroll = 100}
-               };
-                ReportDataSource rd = new ReportDataSource("CoursEnrollPerYearDataSet", data);
+               var report = await Mediator.RequestAsync<GetStudentEnrollmentReportBerYearQuery, QueryResult<CountCourseStudentsEnrollModel>>(queries);
+                ReportDataSource rd = new ReportDataSource("CoursEnrollPerYearDataSet", report.result.ToList());
                 lr.DataSources.Add(rd);
                 var renderedBytes = lr.Render("PDF");
                 return File(renderedBytes, "application/pdf", "Course_ENrolllMentPerYear.pdf");
@@ -69,7 +64,7 @@ namespace E_Learning_System.Controllers
                 ReportDataSource rd = new ReportDataSource("CoursEnrollDataSet", report.result.ToList());
                 lr.DataSources.Add(rd);
                 var renderedBytes = lr.Render("PDF");
-                return File(renderedBytes,"application/pdf","Course_ENrolllMent.pdf");
+                return File(renderedBytes, "application/pdf", "Course_ENrolllMent.pdf");
             }
             catch (Exception e)
             {
