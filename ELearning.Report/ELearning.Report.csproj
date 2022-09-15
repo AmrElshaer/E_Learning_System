@@ -53,15 +53,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>StudentsDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="StudentsDataSetCountCourseEnroll.Designer.cs">
+    <Compile Include="StudentsDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>StudentsDataSetCountCourseEnroll.xsd</DependentUpon>
+      <DependentUpon>StudentsDataSet1.xsd</DependentUpon>
     </Compile>
-    <Content Include="CourseEnrollReport.rdlc">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="GetCourseEnrollForYearReport.rdlc" />
+    <EmbeddedResource Include="CourseEnrollPerYearReport.rdlc" />
+    <EmbeddedResource Include="CoursEnrollReport.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -91,16 +89,16 @@
     <None Include="StudentsDataSet.xss">
       <DependentUpon>StudentsDataSet.xsd</DependentUpon>
     </None>
-    <None Include="StudentsDataSetCountCourseEnroll.xsc">
-      <DependentUpon>StudentsDataSetCountCourseEnroll.xsd</DependentUpon>
+    <None Include="StudentsDataSet1.xsc">
+      <DependentUpon>StudentsDataSet1.xsd</DependentUpon>
     </None>
-    <None Include="StudentsDataSetCountCourseEnroll.xsd">
+    <None Include="StudentsDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>StudentsDataSetCountCourseEnroll.Designer.cs</LastGenOutput>
+      <LastGenOutput>StudentsDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="StudentsDataSetCountCourseEnroll.xss">
-      <DependentUpon>StudentsDataSetCountCourseEnroll.xsd</DependentUpon>
+    <None Include="StudentsDataSet1.xss">
+      <DependentUpon>StudentsDataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

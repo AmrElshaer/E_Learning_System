@@ -32,25 +32,21 @@ namespace E_Learning_System.Controllers
             try
             {
                 LocalReport lr = new LocalReport();
-                string path = Path.Combine(Server.MapPath("~/Reports"), "GetCourseEnrollForYearReport.rdlc");
+                string path = Path.Combine(Server.MapPath("~/Reports"), "CourseEnrollPerYearReport.rdlc");
                 if (System.IO.File.Exists(path))
                 {
                     lr.ReportPath = path;
                 }
-                var report = await Mediator.RequestAsync<GetStudentEnrollmentReportBerYearQuery, QueryResult<CountCourseStudentsEnrollModel>>(queries);
-                ReportDataSource rd = new ReportDataSource("GetCourseEnrollForYearDBSet", report.result.ToList());
+               // var report = await Mediator.RequestAsync<GetStudentEnrollmentReportBerYearQuery, QueryResult<CountCourseStudentsEnrollModel>>(queries);
+               List<CountCourseStudentsEnrollModel> data = new List<CountCourseStudentsEnrollModel>()
+               {
+                   new CountCourseStudentsEnrollModel(){CourseTitle = "DotNet",NumOfStudentEnroll = 25},
+                   new CountCourseStudentsEnrollModel(){CourseTitle = "Js",NumOfStudentEnroll = 100}
+               };
+                ReportDataSource rd = new ReportDataSource("CoursEnrollPerYearDataSet", data);
                 lr.DataSources.Add(rd);
-                string deviceInfo =
-                    $"<DeviceInfo><OutputFormat>PDF</OutputFormat><PageWidth>8.5</PageWidth><PageHeight>11in</PageHeight><MarginTop>0.5in</MarginTop></DeviceInfo>";
-                Warning[] warnings;
-                string[] streams;
-                byte[] renderedBytes;
-                string mimeType;
-                string encodings;
-                string fileNameExtension;
-                renderedBytes = lr.Render("PDF", deviceInfo, out mimeType, out encodings, out fileNameExtension,
-                    out streams, out warnings);
-                return File(renderedBytes, mimeType);
+                var renderedBytes = lr.Render("PDF");
+                return File(renderedBytes, "application/pdf", "Course_ENrolllMentPerYear.pdf");
             }
             catch (Exception e)
             {
@@ -63,25 +59,17 @@ namespace E_Learning_System.Controllers
             try
             {
                 LocalReport lr = new LocalReport();
-                string path = Path.Combine(Server.MapPath("~/Reports"), "CourseEnrollReport.rdlc");
+                lr.DataSources.Clear();
+                string path = Path.Combine(Server.MapPath("~/Reports"), "CoursEnrollReport.rdlc");
                 if (System.IO.File.Exists(path))
                 {
                     lr.ReportPath = path;
                 }
                 var report = await Mediator.RequestAsync<GetStudentEnrollmentReportQuery, QueryResult<StudentEnrollmentReportModel>>(queries);
-                ReportDataSource rd = new ReportDataSource("StudentEnrollmentRep", report.result.ToList());
+                ReportDataSource rd = new ReportDataSource("CoursEnrollDataSet", report.result.ToList());
                 lr.DataSources.Add(rd);
-                string deviceInfo =
-                    $"<DeviceInfo><OutputFormat>PDF</OutputFormat><PageWidth>8.5</PageWidth><PageHeight>11in</PageHeight><MarginTop>0.5in</MarginTop></DeviceInfo>";
-                Warning[] warnings;
-                string[] streams;
-                byte[] renderedBytes;
-                string mimeType;
-                string encodings;
-                string fileNameExtension;
-                renderedBytes = lr.Render("PDF", deviceInfo, out mimeType, out encodings, out fileNameExtension,
-                    out streams, out warnings);
-                return File(renderedBytes, mimeType);
+                var renderedBytes = lr.Render("PDF");
+                return File(renderedBytes,"application/pdf","Course_ENrolllMent.pdf");
             }
             catch (Exception e)
             {

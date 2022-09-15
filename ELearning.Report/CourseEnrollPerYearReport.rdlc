@@ -2,18 +2,18 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="StudentsDataSetCountCourseEnroll">
+    <DataSource Name="StudentsDataSet1">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>0057b5ea-8bca-4f95-85e6-7a2e0874cd5d</rd:DataSourceID>
+      <rd:DataSourceID>66152e84-5a22-4dff-9cd7-a70a396446a6</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="GetCourseEnrollForYearDBSet">
+    <DataSet Name="CoursEnrollPerYearDataSet">
       <Query>
-        <DataSourceName>StudentsDataSetCountCourseEnroll</DataSourceName>
+        <DataSourceName>StudentsDataSet1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -27,8 +27,8 @@
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>StudentsDataSetCountCourseEnroll</rd:DataSetName>
-        <rd:SchemaPath>D:\Projects\E_Learning_System\ELearning.Report\StudentsDataSetCountCourseEnroll.xsd</rd:SchemaPath>
+        <rd:DataSetName>StudentsDataSet1</rd:DataSetName>
+        <rd:SchemaPath>D:\Projects\E_Learning_System\ELearning.Report\StudentsDataSet1.xsd</rd:SchemaPath>
         <rd:TableName>CountCourse_StudentsEnroll</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -384,11 +384,9 @@
                 <VerticalAlign>Top</VerticalAlign>
               </Style>
             </ChartNoDataMessage>
-            <DataSetName>GetCourseEnrollForYearDBSet</DataSetName>
-            <Top>0.49667in</Top>
-            <Left>1.19667in</Left>
-            <Height>2in</Height>
-            <Width>3in</Width>
+            <DataSetName>CoursEnrollPerYearDataSet</DataSetName>
+            <Height>2.20833in</Height>
+            <Width>3.86667in</Width>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -399,7 +397,7 @@
             </Style>
           </Chart>
         </ReportItems>
-        <Height>2.49667in</Height>
+        <Height>2.48833in</Height>
         <Style />
       </Body>
       <Width>6.5in</Width>
@@ -419,5 +417,5 @@
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>e6952a2b-6c86-4739-8a06-4604f302c257</rd:ReportID>
+  <rd:ReportID>8807ca60-5028-4224-ba1f-a4844f697609</rd:ReportID>
 </Report>
