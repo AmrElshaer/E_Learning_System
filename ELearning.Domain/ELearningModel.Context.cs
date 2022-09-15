@@ -56,5 +56,14 @@ namespace ELearning.Domain
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetEnrollMentStudentReport_Result>("GetEnrollMentStudentReport", firstNameParameter, lastNameParameter);
         }
+    
+        public virtual ObjectResult<CountCourse_StudentsEnroll_Result> CountCourse_StudentsEnroll(Nullable<int> year)
+        {
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CountCourse_StudentsEnroll_Result>("CountCourse_StudentsEnroll", yearParameter);
+        }
     }
 }

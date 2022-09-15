@@ -59,6 +59,9 @@
     <Compile Include="ClassStanding.cs">
       <DependentUpon>ELearningModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CountCourse_StudentsEnroll_Result.cs">
+      <DependentUpon>ELearningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Cours.cs">
       <DependentUpon>ELearningModel.tt</DependentUpon>
     </Compile>

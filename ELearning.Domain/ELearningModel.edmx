@@ -355,6 +355,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="CountCourse_StudentsEnroll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetEnrollMentStudentReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="firstName" Type="varchar" Mode="In" />
           <Parameter Name="lastName" Type="varchar" Mode="In" />
@@ -818,6 +821,9 @@
             <Parameter Name="firstName" Mode="In" Type="String" />
             <Parameter Name="lastName" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CountCourse_StudentsEnroll" ReturnType="Collection(StudentsModel.CountCourse_StudentsEnroll_Result)">
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Cours">
           <Key>
@@ -909,6 +915,10 @@
           <Property Type="String" Name="CourseTitle" Nullable="true" MaxLength="64" />
           <Property Type="String" Name="Grade" Nullable="true" MaxLength="1" />
           <Property Type="String" Name="TermCode" Nullable="true" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="CountCourse_StudentsEnroll_Result">
+          <Property Type="String" Name="CourseTitle" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="NumOfStudentEnroll" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1110,6 +1120,14 @@
                 <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
                 <ScalarProperty Name="Grade" ColumnName="Grade" />
                 <ScalarProperty Name="TermCode" ColumnName="TermCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CountCourse_StudentsEnroll" FunctionName="StudentsModel.Store.CountCourse_StudentsEnroll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentsModel.CountCourse_StudentsEnroll_Result">
+                <ScalarProperty Name="CourseTitle" ColumnName="CourseTitle" />
+                <ScalarProperty Name="NumOfStudentEnroll" ColumnName="NumOfStudentEnroll" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
