@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using ELearning.Application.CourseEnrollment.Queries.GetStudentEnrollmentReportBerYear;
 using Microsoft.Reporting.WebForms;
+using System.Web.UI.WebControls;
 
 namespace E_Learning_System.Controllers
 {
@@ -48,6 +49,21 @@ namespace E_Learning_System.Controllers
                 Console.WriteLine(e);
                 throw;
             }
+        }
+        public async Task<ActionResult> SetLocalReport(GetStudentEnrollmentReportQuery queries)
+        {
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.SizeToReportContent = true;
+            reportViewer.Width = Unit.Percentage(100);
+            reportViewer.Height = Unit.Percentage(100);
+            var report = await Mediator.RequestAsync<GetStudentEnrollmentReportQuery, QueryResult<StudentEnrollmentReportModel>>(queries);
+            string path = Path.Combine(Server.MapPath("~/Reports"), "CoursEnrollReport.rdlc");
+            reportViewer.LocalReport.ReportPath =path;
+            ReportDataSource rd = new ReportDataSource("CoursEnrollDataSet", report.result.ToList());
+            reportViewer.LocalReport.DataSources.Add(rd);
+            ViewBag.ReportViewer = reportViewer;
+            return View();
         }
         public async  Task<ActionResult> RDLCReport(GetStudentEnrollmentReportQuery queries)
         {
