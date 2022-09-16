@@ -1,3 +1,18 @@
 ﻿@using ReportViewerForMvc
-
-@Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+<form style="display: flex;
+             font-size: 16px;
+             margin-top: 5%;
+             font-weight: bold;">
+    <div style="margin: 5px">
+        <label>FirstName</label>
+        <input name="FirstName" style="height: 30px"/>
+    </div>
+    <div style="margin: 5px">
+        <label>LastName</label>
+        <input name="LastName" style="height: 30px"/>
+    </div>
+    <button style="font-weight: bold">Search</button>
+</form>
+@Html.ReportViewer(
+    ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer,
+    new { scrolling = "no" })
