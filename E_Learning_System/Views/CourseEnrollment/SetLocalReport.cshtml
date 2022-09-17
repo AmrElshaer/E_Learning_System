@@ -1,7 +1,6 @@
 ﻿@using ReportViewerForMvc
 <form style="display: flex;
              font-size: 16px;
-             margin-top: 5%;
              font-weight: bold;">
     <div style="margin: 5px">
         <label>FirstName</label>
@@ -13,6 +12,10 @@
     </div>
     <button style="font-weight: bold">Search</button>
 </form>
-@Html.ReportViewer(
-    ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer,
-    new { scrolling = "no" })
+<div   class="table-responsive" style="    height: 100%;
+                                       width: 100%;
+                                       max-height: 600px;
+                                       overflow: scroll;">
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { scrolling = "yes", width = "100%" })
+</div>
+
