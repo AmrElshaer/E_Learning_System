@@ -19,7 +19,7 @@ namespace E_Learning_System
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(WebConfigurationManager.AppSettings["SyncfusionLicence"]);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
