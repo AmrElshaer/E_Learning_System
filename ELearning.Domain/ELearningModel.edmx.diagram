@@ -36,6 +36,7 @@
         <AssociationConnector Association="StudentsModel.FK_CourseOfferings_Courses" />
         <AssociationConnector Association="StudentsModel.FK_CourseOfferings_Terms" />
         <AssociationConnector Association="StudentsModel.fk_Terms_SessionCode" />
+        <EntityTypeShape EntityType="StudentsModel.ScheduleEventData" Width="1.5" PointX="4.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

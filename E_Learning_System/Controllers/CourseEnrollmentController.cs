@@ -1,5 +1,4 @@
-﻿using System;
-using E_Learning_System.Attributes;
+﻿using E_Learning_System.Attributes;
 using ELearning.Application.Common.Commond;
 using ELearning.Application.Common.Query;
 using ELearning.Application.CourseEnrollment.Commonds.CreatEditCoursEnrollment;
@@ -7,16 +6,17 @@ using ELearning.Application.CourseEnrollment.Commonds.DeletCoursEnrollment;
 using ELearning.Application.CourseEnrollment.Queries;
 using ELearning.Application.CourseEnrollment.Queries.GetCoursesEnrollment;
 using ELearning.Application.CourseEnrollment.Queries.GetStudentEnrollMentReport;
+using ELearning.Application.CourseEnrollment.Queries.GetStudentEnrollmentReportBerYear;
+using Microsoft.Reporting.WebForms;
 using MvcRazorToPdf;
 using Syncfusion.EJ2.Base;
 using Syncfusion.EJ2.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using ELearning.Application.CourseEnrollment.Queries.GetStudentEnrollmentReportBerYear;
-using Microsoft.Reporting.WebForms;
 using System.Web.UI.WebControls;
 
 namespace E_Learning_System.Controllers
@@ -38,7 +38,7 @@ namespace E_Learning_System.Controllers
                 {
                     lr.ReportPath = path;
                 }
-               var report = await Mediator.RequestAsync<GetStudentEnrollmentReportBerYearQuery, QueryResult<CountCourseStudentsEnrollModel>>(queries);
+                var report = await Mediator.RequestAsync<GetStudentEnrollmentReportBerYearQuery, QueryResult<CountCourseStudentsEnrollModel>>(queries);
                 ReportDataSource rd = new ReportDataSource("CoursEnrollPerYearDataSet", report.result.ToList());
                 lr.DataSources.Add(rd);
                 var renderedBytes = lr.Render("PDF");
@@ -59,13 +59,13 @@ namespace E_Learning_System.Controllers
             reportViewer.Height = Unit.Percentage(100);
             var report = await Mediator.RequestAsync<GetStudentEnrollmentReportQuery, QueryResult<StudentEnrollmentReportModel>>(queries);
             string path = Path.Combine(Server.MapPath("~/Reports"), "CoursEnrollReport.rdlc");
-            reportViewer.LocalReport.ReportPath =path;
+            reportViewer.LocalReport.ReportPath = path;
             ReportDataSource rd = new ReportDataSource("CoursEnrollDataSet", report.result.ToList());
             reportViewer.LocalReport.DataSources.Add(rd);
             ViewBag.ReportViewer = reportViewer;
             return View();
         }
-        public async  Task<ActionResult> RDLCReport(GetStudentEnrollmentReportQuery queries)
+        public async Task<ActionResult> RDLCReport(GetStudentEnrollmentReportQuery queries)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace E_Learning_System.Controllers
         }
     }
 
-  
+
 
     public class PdfExample<T>
     {

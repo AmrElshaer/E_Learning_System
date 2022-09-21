@@ -145,6 +145,10 @@
     <Compile Include="FluentValidationModule.cs" />
     <Compile Include="MediatRModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule\Commonds\UpdatScheduleCommond.cs" />
+    <Compile Include="Schedule\Commonds\UpdatScheduleCommondHandler.cs" />
+    <Compile Include="Schedule\Queries\GetScheduleQueries.cs" />
+    <Compile Include="Schedule\Queries\ScheduleEventDto.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommond.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentCommondHandler.cs" />
     <Compile Include="Student\Commonds\CreatEditStudent\CreatEditStudentValidator.cs" />

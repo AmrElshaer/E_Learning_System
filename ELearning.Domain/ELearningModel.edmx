@@ -121,6 +121,21 @@
           <Property Name="Points" Type="decimal" Precision="2" Scale="1" />
           <Property Name="IncludeInGpa" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ScheduleEventDatas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Subject" Type="varchar" MaxLength="200" />
+          <Property Name="StartTimezone" Type="datetimeoffset" Precision="7" />
+          <Property Name="EndTimezone" Type="datetime" />
+          <Property Name="RecurrenceRule" Type="varchar" MaxLength="200" />
+          <Property Name="RecurrenceID" Type="varchar" MaxLength="50" />
+          <Property Name="RecurrenceException" Type="varchar" MaxLength="50" />
+          <Property Name="IsAllDay" Type="bit" />
+        </EntityType>
         <EntityType Name="Sessions">
           <Key>
             <PropertyRef Name="SessionCode" />
@@ -374,6 +389,7 @@
           <EntitySet Name="DegreeTypes" EntityType="Self.DegreeTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleEventDatas" EntityType="Self.ScheduleEventDatas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentProfiles" EntityType="Self.StudentProfiles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
@@ -822,8 +838,9 @@
             <Parameter Name="lastName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="CountCourse_StudentsEnroll" ReturnType="Collection(StudentsModel.CountCourse_StudentsEnroll_Result)">
-            <Parameter Name="year" Mode="In" Type="Int32" />
+          <Parameter Name="year" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="ScheduleEventDatas" EntityType="StudentsModel.ScheduleEventData" />
           </EntityContainer>
         <EntityType Name="Cours">
           <Key>
@@ -920,6 +937,21 @@
           <Property Type="String" Name="CourseTitle" Nullable="true" MaxLength="64" />
           <Property Type="Int32" Name="NumOfStudentEnroll" Nullable="true" />
         </ComplexType>
+        <EntityType Name="ScheduleEventData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="DateTime" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="Subject" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="StartTimezone" Type="DateTimeOffset" Precision="7" />
+          <Property Name="EndTimezone" Type="DateTime" Precision="3" />
+          <Property Name="RecurrenceRule" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="RecurrenceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RecurrenceException" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsAllDay" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1131,6 +1163,22 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ScheduleEventDatas">
+            <EntityTypeMapping TypeName="StudentsModel.ScheduleEventData">
+              <MappingFragment StoreEntitySet="ScheduleEventDatas">
+                <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+                <ScalarProperty Name="RecurrenceException" ColumnName="RecurrenceException" />
+                <ScalarProperty Name="RecurrenceID" ColumnName="RecurrenceID" />
+                <ScalarProperty Name="RecurrenceRule" ColumnName="RecurrenceRule" />
+                <ScalarProperty Name="EndTimezone" ColumnName="EndTimezone" />
+                <ScalarProperty Name="StartTimezone" ColumnName="StartTimezone" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

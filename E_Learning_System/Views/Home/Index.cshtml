@@ -1,13 +1,17 @@
-﻿@{
+﻿@using Syncfusion.EJ2.Schedule
+@using Syncfusion.EJ2
+@{
+    var dateNow = DateTime.Now;
     ViewBag.Title = "Home Page";
 }
-
 <div>
 
-    <h1>education from home</h1>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum neque aliquid similique error velit placeat vitae accusantium est nam magnam?</p>
-    <a href="#"><button class="btn">get started</button></a>
-
-    <div class="shape"></div>
+    @(Html.EJS().Schedule("schedule")
+        .Width("100%")
+        .Height("800px")
+        .EventSettings(e => e.DataSource(d => d.Url("Home/LoadData").CrudUrl("Home/UpdateData").Adaptor("UrlAdaptor").CrossDomain(true)))
+        .SelectedDate(new DateTime(dateNow.Year,dateNow.Month, dateNow.Day))
+        .Render()
+        )
 
 </div>

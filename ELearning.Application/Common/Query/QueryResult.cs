@@ -7,5 +7,14 @@ namespace ELearning.Application.Common.Query
     {
         public int count { get; set; }
         public IList<T> result { get; set; }
+
+        public QueryResult()
+        {
+
+        }
+        public QueryResult(IList<T> data)
+        {
+            this.result = data;
+        }
     }
 }

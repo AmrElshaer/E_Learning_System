@@ -43,6 +43,7 @@ namespace ELearning.Domain
         public virtual DbSet<Cours> Courses { get; set; }
         public virtual DbSet<CourseOffering> CourseOfferings { get; set; }
         public virtual DbSet<Term> Terms { get; set; }
+        public virtual DbSet<ScheduleEventData> ScheduleEventDatas { get; set; }
     
         public virtual ObjectResult<GetEnrollMentStudentReport_Result> GetEnrollMentStudentReport(string firstName, string lastName)
         {

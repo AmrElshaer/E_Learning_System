@@ -108,6 +108,9 @@
       <DependentUpon>ELearningModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScheduleEventData.cs">
+      <DependentUpon>ELearningModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Session.cs">
       <DependentUpon>ELearningModel.tt</DependentUpon>
     </Compile>
